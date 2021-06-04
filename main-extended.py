@@ -98,6 +98,9 @@ w = m.addVars(nP, nS, nAS, vtype=GRB.BINARY, name='w')
 bb = m.addVars(nS, vtype=GRB.BINARY, name='bb')
 z = m.addVar(vtype=GRB.INTEGER, name='z')
 
+c = m.addVars(nP, nS, vtype=GRB.BINARY, name='c')
+o = m.addVars(nP, nS, vtype=GRB.BINARY, name='o')
+
 nL = nAS
 
 for a in range(nA):
@@ -170,21 +173,32 @@ for b in range(nB):
     calc = sum(bb[s]*y[s, r, b] for s in range(nS) for r in range(nR))
     m.addConstr(calc <= 1, name="avoid-best-parallel")
 
-# for s in range(nS):
-#     for r in range(nR):
-#         for b in range(nB):
-#             t = sessions[s]
-#             pp = tracks[t].chairs
-#             m.addConstr((y[s, r, b] == 1) >> (sum(w[p, s]
-#                         for p in pp) >= 1), name="set-chair-in-session")
 
-# for s in range(nS):
-#     for r in range(nR):
-#         for b in range(nB):
-#             t = sessions[s]
-#             pp = tracks[t].organizers
-#             m.addConstr((y[s, r, b] == 1) >> (sum(w[p, s]
-#                         for p in pp) >= 1), name="set-org-in-session")
+for s in range(nS):
+    for r in range(nR):
+        for b in range(nB):
+            t = sessions[s]
+            pp = tracks[t].chairs
+            m.addConstr((y[s, r, b] == 1) >> (sum(c[p, s]
+                        for p in pp) >= 1), name="set-chair")
+
+for p in range(nP):
+    for s in range(nS):
+        m.addConstr((c[p, s] == 1) >> (sum(w[p, s, l]
+                    for l in range(nL)) == nL), name="if-chair-force-use-whole-session")
+
+for s in range(nS):
+    for r in range(nR):
+        for b in range(nB):
+            t = sessions[s]
+            pp = tracks[t].chairs
+            m.addConstr((y[s, r, b] == 1) >> (sum(o[p, s]
+                        for p in pp) >= 1), name="set-organizers")
+
+for p in range(nP):
+    for s in range(nS):
+        m.addConstr((o[p, s] == 1) >> (sum(w[p, s, l]
+                    for l in range(nL)) == nL), name="if-organizers-force-use-whole-session")
 
 m.setObjective(z, GRB.MINIMIZE)
 m.optimize()
