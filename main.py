@@ -37,7 +37,9 @@ class Room:
 
 
 cnT = {}
-fp = open("MAGNIFIC.csv", "r")
+filename = "out.csv"
+fp = open(filename, "r")
+
 lines = [line.strip() for line in fp.readlines() if line[0] != '#']
 lines = iter(lines)
 
@@ -173,5 +175,5 @@ for s in range(nS):
 
 m.setObjective(z, GRB.MINIMIZE)
 m.optimize()
-m.write('csTrackSolver.lp')
-m.write('csTrackSolver.sol')
+m.write(f'logs/{filename}.lp')
+m.write(f'logs/{filename}.sol')
