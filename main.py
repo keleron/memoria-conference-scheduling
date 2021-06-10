@@ -5,6 +5,10 @@ from math import ceil
 import pprint
 from model.models import Article, Person, Track, Room
 
+import os
+if not os.path.exists('logs'):
+    os.makedirs('logs')
+
 cnT = {}
 filename = "A174-R8-B7-L4.193.cs"
 fp = open("instances/"+filename, "r")

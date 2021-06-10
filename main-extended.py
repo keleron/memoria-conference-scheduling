@@ -6,6 +6,10 @@ import pprint
 import sys
 from model.models import Article, Person, Track, Room
 
+import os
+if not os.path.exists('logs'):
+    os.makedirs('logs')
+
 cnT = {}
 filename = "A174-P150-R8-B7-L4-T12.cs"
 fp = open("instances/"+filename, "r")
