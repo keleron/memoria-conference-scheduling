@@ -3,42 +3,11 @@ from gurobipy import GRB
 import gurobipy as gp
 from math import ceil
 import pprint
-pp = pprint.PrettyPrinter(indent=4).pprint
-
-
-class Article:
-    def __init__(self, id, track, author, best):
-        self.id = id
-        self.track = track
-        self.author = author
-        self.best = best
-
-
-class Person:
-    def __init__(self, id, conflicts):
-        self.id = id
-        self.conflicts = conflicts
-
-
-class Track:
-    def __init__(self, id, attendance):
-        self.id = id
-        self.attendance = attendance
-        self.articles = []
-        self.chairs = []
-        self.organizers = []
-        self.sessions = 0
-
-
-class Room:
-    def __init__(self, id, capacity):
-        self.id = id
-        self.capacity = capacity
-
+from model.models import Article, Person, Track, Room
 
 cnT = {}
-filename = "out.csv"
-fp = open(filename, "r")
+filename = "A174-R8-B7-L4.193.cs"
+fp = open("instances/"+filename, "r")
 
 lines = [line.strip() for line in fp.readlines() if line[0] != '#']
 lines = iter(lines)
