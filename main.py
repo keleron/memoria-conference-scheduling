@@ -124,7 +124,7 @@ for s in range(nS):
         tt = sessions[s]
         if tracks[tt].attendance > rooms[r].capacity:
             for b in range(nB):
-                m.addConstr(y[s, r, b] == 0)
+                m.addConstr(y[s, r, b] == 0, name="room-capacity")
 
 for p in range(nP):
     for b in range(nB):

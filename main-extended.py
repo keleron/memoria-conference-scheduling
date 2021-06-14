@@ -11,7 +11,7 @@ if not os.path.exists('logs'):
     os.makedirs('logs')
 
 cnT = {}
-filename = "A40-P38-R4-B4-L3-T10.cs"
+filename = "A174-P150-R8-B7-L4-T12.cs"
 fp = open("instances/"+filename, "r")
 lines = [line.strip() for line in fp.readlines() if line[0] != '#']
 lines = iter(lines)
@@ -137,6 +137,12 @@ for p in range(nP):
                                 name="avoid-personal-conflicts")
 
 # SKIP ROOM SIZE
+for s in range(nS):
+    for r in range(nR):
+        tt = sessions[s]
+        if tracks[tt].attendance > rooms[r].capacity:
+            for b in range(nB):
+                m.addConstr(y[s, r, b] == 0, name="room-capacity")
 
 for p in range(nP):
     for b in range(nB):
