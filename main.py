@@ -10,7 +10,7 @@ if not os.path.exists('logs'):
     os.makedirs('logs')
 
 cnT = {}
-filename = "A174-R8-B7-L4.193.cs"
+filename = "A174-P150-R8-B7-L4-T12.cs"
 fp = open("instances/"+filename, "r")
 
 lines = [line.strip() for line in fp.readlines() if line[0] != '#']
@@ -119,6 +119,12 @@ for p in range(nP):
                             name="avoid-personal-conflicts")
 
 # SKIP ROOM SIZE
+for s in range(nS):
+    for r in range(nR):
+        tt = sessions[s]
+        if tracks[tt].attendance > rooms[r].capacity:
+            for b in range(nB):
+                m.addConstr(y[s, r, b] == 0)
 
 for p in range(nP):
     for b in range(nB):
@@ -150,3 +156,45 @@ m.setObjective(z, GRB.MINIMIZE)
 m.optimize()
 m.write(f'logs/{filename}.lp')
 m.write(f'logs/{filename}.sol')
+
+# for v in m.getVars():
+#     print(v.x)
+
+sessions = [{"people": [], "articles": [], "where":(0, 0)} for n in range(nS)]
+
+for v in x.values():
+    if v.X:
+        art, ses = eval(v.varName[1:])
+        # print(art, ses)
+        sessions[ses]["articles"].append(art)
+
+for v in y.values():
+    if v.X:
+        ses, room, block = eval(v.varName[1:])
+        sessions[ses]["where"] = (room, block)
+
+for v in w.values():
+    if v.X:
+        per, ses = eval(v.varName[1:])
+        # print(art, ses)
+        sessions[ses]["people"].append(per)
+
+
+def superSort(e):
+    return e["where"]
+
+
+sessions.sort(key=superSort)
+# print(sessions)
+f_sessions = [[0 for col in range(nB)] for row in range(nR)]
+for ses in sessions:
+    i, j = ses["where"]
+    f_sessions[i][j] = ses
+
+for row in f_sessions:
+    for col in row:
+        if col != 0:
+            print(str(col["articles"])+"#"+str(col["people"]), end=";")
+        else:
+            print("0000", end=";")
+    print("\n")

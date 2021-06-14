@@ -8,23 +8,36 @@ seed(777)
 def r(x, y): return randint(x, y-1)
 
 
-nA = 174
-nP = 150
-nR = 8
-nB = 7
-nT = 12
-nAS = 4
+nA = 40
+nP = 38
+nR = 4
+nB = 4
+nAS = 3
+nT = 5
 nSD = 20
 
 pp = {
-    "best": 0.13,
-    "conflicts": 200
+    "best_track": 0,
+    "best_amout": 0,
+    "conflicts": 0,
+
 }
+
+nA = input(f"#ARTICULOS [ {nA} ] : ") or nA
+nP = input(f"#PERSONAS  [ {nP} ] : ") or nP
+nR = input(f"#SALONES   [ {nR} ] : ") or nR
+nB = input(f"#BLOQUES   [ {nB} ] : ") or nB
+nAS = input(f"#ARTICULOS POR SESION  [ {nAS} ] :") or nAS
+nT = input(f"#TRACKS  [ {nT} ] : ") or nT
+
+nA, nP, nR, nB, nAS, nT, nSD = map(int, [nA, nP, nR, nB, nAS, nT, nSD])
+
 
 filename = f"A{nA}-P{nP}-R{nR}-B{nB}-L{nAS}-T{nT}.cs"
 print(filename)
 
 fp = open("instances/"+filename, "w")
+best_counter = 0
 
 
 def print(*args):
@@ -37,15 +50,15 @@ if nA > nB*nR*nAS:
     exit("Not enough space")
 
 print("# ARTICULOS	HUMANOS TOTAL	BLOQUES	SALONES	TRACKS	ARTICULOS POR SESION	SESIONES POR DIA")
-# fp.write("# ARTICULOS HUMANOS-TOTAL BLOQUES SALONES TRACKS ARTICULOS-POR-SESION SESIONES-POR-DIA")
 print(nA, nP, nB, nR, nT, nAS, nSD)
 print("#ARTICULO	TRACK	PRESENTADOR	BEST PAPER	")
+
+
 for a in range(nA):
     tt = r(0, nT)
     best = 0
-    if tt < 4:
-        best = 1 if u() < pp["best"] else 0
-
+    if tt < pp['best_track'] and best_counter < pp['best_amout']:
+        best = 1
     print(a, tt, r(0, nP), best)
 
 people = []

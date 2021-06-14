@@ -11,7 +11,7 @@ if not os.path.exists('logs'):
     os.makedirs('logs')
 
 cnT = {}
-filename = "A174-P150-R8-B7-L4-T12.cs"
+filename = "A40-P38-R4-B4-L3-T10.cs"
 fp = open("instances/"+filename, "r")
 lines = [line.strip() for line in fp.readlines() if line[0] != '#']
 lines = iter(lines)
