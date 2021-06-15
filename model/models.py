@@ -5,6 +5,7 @@ class Article:
         self.author = author
         self.best = best
 
+
 class Person:
     def __init__(self, id, conflicts):
         self.id = id

@@ -11,7 +11,7 @@ if not os.path.exists('logs'):
     os.makedirs('logs')
 
 cnT = {}
-filename = "A174-P150-R8-B7-L4-T12.cs"
+filename = "A50-P48-R5-B7-L2-T10-!1-!t3-C10.cs"
 fp = open("instances/"+filename, "r")
 lines = [line.strip() for line in fp.readlines() if line[0] != '#']
 lines = iter(lines)
@@ -173,7 +173,7 @@ for s in range(nS):
     for r in range(nR):
         for b in range(nB):
             t = sessions[s]
-            pp = tracks[t].chairs
+            pp = tracks[t].organizers
             m.addConstr((y[s, r, b] == 1) >> (sum(o[p, s]
                         for p in pp) >= 1), name="set-organizers")
 
@@ -186,3 +186,84 @@ m.setObjective(z, GRB.MINIMIZE)
 m.write(f'logs/{filename}.lp')
 m.optimize()
 m.write(f'logs/{filename}.sol')
+
+
+sessions = [{"people": [], "articles": [], "where":(
+    0, 0), "chairs":[], "org":[]} for n in range(nS)]
+
+for v in x.values():
+    if v.X:
+        art, ses, slot = eval(v.varName[1:])
+        sessions[ses]["articles"].append((art, slot))
+
+for v in y.values():
+    if v.X:
+        ses, room, block = eval(v.varName[1:])
+        sessions[ses]["where"] = (room, block)
+
+for v in w.values():
+    if v.X:
+        per, ses, slot = eval(v.varName[1:])
+        sessions[ses]["people"].append((per, slot))
+
+for v in c.values():
+    if v.X:
+        per, ses = eval(v.varName[1:])
+        # print(art, ses)
+        sessions[ses]["chairs"].append(per)
+
+for v in o.values():
+    if v.X:
+        per, ses = eval(v.varName[1:])
+        # print(art, ses)
+        sessions[ses]["org"].append(per)
+
+print(sessions)
+
+
+for ses in sessions:
+    ses['people'].sort(key=lambda x: x[1])
+
+for ses in sessions:
+    block_all = [x[1] for x in ses['articles']]
+    for nas in range(nAS):
+        if nas not in block_all:
+            ses['articles'].append((-1, nas))
+    ses['articles'].sort(key=lambda x: x[1])
+    # print(ses['articles'])
+    # ses['people'] = [articles[e].author for e in ses['articles']]
+    ses['articles'] = [(a[0], articles[a[0]].author if a[0]
+                        != -1 else -1) for a in ses['articles']]
+
+# print(sessions)
+
+sessions.sort(key=lambda e: e["where"])
+
+f_sessions = [[-1 for col in range(nB)] for row in range(nR)]
+for ses in sessions:
+    i, j = ses["where"]
+    f_sessions[i][j] = ses
+
+for i in range(nR):
+    for j in range(nB):
+        ses = f_sessions[i][j]
+        if ses != -1:
+            print(*ses["articles"], end=";", sep=";")
+            print(";", end="")
+        else:
+            print(*([-1]*nAS), end=";", sep=";")
+            print(";", end="")
+    print("\n")
+
+print("")
+
+for i in range(nR):
+    for j in range(nB):
+        ses = f_sessions[i][j]
+        if ses != -1:
+            print(*ses["chairs"], *ses["org"], end=";", sep="#")
+            print(";", end=";")
+        else:
+            print(-1, end=";", sep=";")
+            print(";", end=";")
+    print("\n")
