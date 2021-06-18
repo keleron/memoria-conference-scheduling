@@ -5,13 +5,14 @@ from math import ceil
 import pprint
 import sys
 from model.models import Article, Person, Track, Room
-
 import os
-if not os.path.exists('logs'):
+
+if not os.path.exists('logs'): 
     os.makedirs('logs')
 
 cnT = {}
-filename = "A50-P48-R5-B7-L2-T10-!1-!t3-C10.cs"
+filename = "A50-P48-R6-B7-L2-T10-!1-!t3-C10.cs"
+
 fp = open("instances/"+filename, "r")
 lines = [line.strip() for line in fp.readlines() if line[0] != '#']
 lines = iter(lines)
@@ -64,6 +65,11 @@ sessions = []
 for t in range(nT):
     sessions += [tracks[t].id] * tracks[t].sessions
 
+waste = [[0 for r in range(nR)]for s in range(nS)]
+for s in range(nS):
+    for r in range(nR):
+        tt = sessions[s]
+        waste[s][r] = abs(rooms[r].capacity-tracks[tt].attendance)
 
 m = gp.Model("simple")
 # x = m.addVars(nA, nS, vtype=GRB.BINARY, name='x')
@@ -137,12 +143,15 @@ for p in range(nP):
                                 name="avoid-personal-conflicts")
 
 # SKIP ROOM SIZE
-for s in range(nS):
-    for r in range(nR):
-        tt = sessions[s]
-        if tracks[tt].attendance > rooms[r].capacity:
-            for b in range(nB):
-                m.addConstr(y[s, r, b] == 0, name="room-capacity")
+# for s in range(nS):
+#     for r in range(nR):
+#         tt = sessions[s]
+#         if tracks[tt].attendance > rooms[r].capacity:
+#             for b in range(nB):
+#                 m.addConstr(y[s, r, b] == 0, name="room-capacity")
+
+m.addConstr(z == sum(y[s, r, b]*waste[s][r]
+            for s in range(nS) for r in range(nR) for b in range(nB)), name="objective")
 
 for p in range(nP):
     for b in range(nB):
@@ -218,9 +227,6 @@ for v in o.values():
         # print(art, ses)
         sessions[ses]["org"].append(per)
 
-print(sessions)
-
-
 for ses in sessions:
     ses['people'].sort(key=lambda x: x[1])
 
@@ -244,26 +250,27 @@ for ses in sessions:
     i, j = ses["where"]
     f_sessions[i][j] = ses
 
-for i in range(nR):
-    for j in range(nB):
-        ses = f_sessions[i][j]
-        if ses != -1:
-            print(*ses["articles"], end=";", sep=";")
-            print(";", end="")
-        else:
-            print(*([-1]*nAS), end=";", sep=";")
-            print(";", end="")
-    print("\n")
+with open(f"logs/{filename}.sol", 'a') as f:
+    for i in range(nR):
+        for j in range(nB):
+            ses = f_sessions[i][j]
+            if ses != -1:
+                print(*ses["articles"], end=";", sep=";", file=f)
+                print(";", end="", file=f)
+            else:
+                print(*([-1]*nAS), end=";", sep=";", file=f)
+                print(";", end="", file=f)
+        print("\n", file=f)
 
-print("")
+    print("", file=f)
 
-for i in range(nR):
-    for j in range(nB):
-        ses = f_sessions[i][j]
-        if ses != -1:
-            print(*ses["chairs"], *ses["org"], end=";", sep="#")
-            print(";", end=";")
-        else:
-            print(-1, end=";", sep=";")
-            print(";", end=";")
-    print("\n")
+    for i in range(nR):
+        for j in range(nB):
+            ses = f_sessions[i][j]
+            if ses != -1:
+                print(*ses["chairs"], *ses["org"], end=";", sep="#", file=f)
+                print(";", end=";", file=f)
+            else:
+                print(-1, end=";", sep=";", file=f)
+                print(";", end=";", file=f)
+        print("\n", file=f)

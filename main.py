@@ -3,14 +3,15 @@ from gurobipy import GRB
 import gurobipy as gp
 from math import ceil
 import pprint
+from contextlib import redirect_stdout
 from model.models import Article, Person, Track, Room
-
 import os
+
 if not os.path.exists('logs'):
     os.makedirs('logs')
 
 cnT = {}
-filename = "A174-P150-R8-B7-L4-T12.cs"
+filename = "A120-P110-R10-B10-L3-T12-!4-!t5-C100.cs"
 fp = open("instances/"+filename, "r")
 
 lines = [line.strip() for line in fp.readlines() if line[0] != '#']
@@ -63,6 +64,12 @@ sessions = []
 for t in range(nT):
     sessions += [tracks[t].id] * tracks[t].sessions
 
+
+waste = [[0 for r in range(nR)]for s in range(nS)]
+for s in range(nS):
+    for r in range(nR):
+        tt = sessions[s]
+        waste[s][r] = abs(rooms[r].capacity-tracks[tt].attendance)
 
 m = gp.Model("simple")
 x = m.addVars(nA, nS, vtype=GRB.BINARY, name='x')
@@ -119,12 +126,14 @@ for p in range(nP):
                             name="avoid-personal-conflicts")
 
 # SKIP ROOM SIZE
-for s in range(nS):
-    for r in range(nR):
-        tt = sessions[s]
-        if tracks[tt].attendance > rooms[r].capacity:
-            for b in range(nB):
-                m.addConstr(y[s, r, b] == 0, name="room-capacity")
+# for s in range(nS):
+#     for r in range(nR):
+#         tt = sessions[s]
+#         if tracks[tt].attendance > rooms[r].capacity:
+#             for b in range(nB):
+#                 m.addConstr(y[s, r, b] == 0, name="room-capacity")
+m.addConstr(z == sum(y[s, r, b]*waste[s][r]
+            for s in range(nS) for r in range(nR) for b in range(nB)), name="objective")
 
 for p in range(nP):
     for b in range(nB):
@@ -184,17 +193,22 @@ def superSort(e):
     return e["where"]
 
 
-sessions.sort(key=superSort)
-# print(sessions)
-f_sessions = [[0 for col in range(nB)] for row in range(nR)]
-for ses in sessions:
-    i, j = ses["where"]
-    f_sessions[i][j] = ses
+fp = open(f"logs/{filename}.sol", 'a')
 
-for row in f_sessions:
-    for col in row:
-        if col != 0:
-            print(str(col["articles"])+"#"+str(col["people"]), end=";")
-        else:
-            print("0000", end=";")
-    print("\n")
+with redirect_stdout(fp):
+    sessions.sort(key=superSort)
+    # print(sessions)
+    f_sessions = [[0 for col in range(nB)] for row in range(nR)]
+    for ses in sessions:
+        i, j = ses["where"]
+        f_sessions[i][j] = ses
+
+    for row in f_sessions:
+        for col in row:
+            if col != 0:
+                print(str(col["articles"])+"#"+str(col["people"]), end=";")
+            else:
+                print("-1", end=";")
+        print("\n")
+
+fp.close()
