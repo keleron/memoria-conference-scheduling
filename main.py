@@ -164,7 +164,7 @@ for s in range(nS):
 m.setObjective(z, GRB.MINIMIZE)
 m.optimize()
 m.write(f'logs/{filename}.lp')
-m.write(f'logs/{filename}.sol')
+m.write(f'logs/{filename}.simple.sol')
 
 # for v in m.getVars():
 #     print(v.x)
@@ -193,7 +193,7 @@ def superSort(e):
     return e["where"]
 
 
-fp = open(f"logs/{filename}.sol", 'a')
+fp = open(f"logs/{filename}.simple.sol", 'a')
 
 with redirect_stdout(fp):
     sessions.sort(key=superSort)
