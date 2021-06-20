@@ -1610,3 +1610,97 @@ Best objective 1.470000000000e+02, best bound 1.470000000000e+02, gap 0.0000%
 Warning: linear constraint 0 and linear constraint 1 have the same name "Articulo-una-sola-vez"
 Warning: quadratic constraint 0 and quadratic constraint 1 have the same name "avoid-personal-conflicts"
 Warning: general constraint 0 and general constraint 1 have the same name "author-asistance"
+
+Gurobi 9.1.1 (win64) logging started Sat Jun 19 21:06:00 2021
+
+Academic license - for non-commercial use only - expires 2021-08-11
+Using license file C:\Users\Keleron\gurobi.lic
+Using gurobi.env file
+Set parameter LogFile to value file.log
+
+Gurobi 9.1.1 (win64) logging started Sat Jun 19 21:06:13 2021
+
+Academic license - for non-commercial use only - expires 2021-08-11
+Using license file C:\Users\Keleron\gurobi.lic
+Using gurobi.env file
+Set parameter LogFile to value file.log
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 7284 rows, 1289 columns and 64384 nonzeros
+Model fingerprint: 0xe90e96cd
+Variable types: 0 continuous, 1289 integer (1288 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+01]
+Found heuristic solution: objective 0.0000000
+
+Explored 0 nodes (0 simplex iterations) in 0.02 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 1: 0 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0000%
+Warning: linear constraint 2804 and linear constraint 2805 have the same name "presenta"
+
+Gurobi 9.1.1 (win64) logging started Sat Jun 19 23:05:06 2021
+
+Academic license - for non-commercial use only - expires 2021-08-11
+Using license file C:\Users\Keleron\gurobi.lic
+Using gurobi.env file
+Set parameter LogFile to value file.log
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 5221 rows, 14565 columns and 32843 nonzeros
+Model fingerprint: 0x7ff871bc
+Model has 45110 quadratic constraints
+Model has 14256 general constraints
+Variable types: 0 continuous, 14565 integer (14564 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  QMatrix range    [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+00]
+  QRHS range       [1e+00, 1e+00]
+Presolve added 6011 rows and 0 columns
+Presolve removed 0 rows and 4808 columns
+Presolve time: 2.90s
+Presolved: 499362 rows, 496777 columns, 2036537 nonzeros
+Variable types: 0 continuous, 496777 integer (496777 binary)
+Found heuristic solution: objective 255.0000000
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   6.100000e+01   4.418972e+09      7s
+Concurrent spin time: 0.18s
+
+Solved with dual simplex
+
+Root relaxation: objective 1.470000e+02, 3933 iterations, 2.74 seconds
+Total elapsed time = 9.31s
+Total elapsed time = 10.30s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+H    0     0                     147.0000000    0.00000   100%     -   11s
+     0     0          -    0       147.00000  147.00000  0.00%     -   11s
+
+Explored 1 nodes (12204 simplex iterations) in 12.39 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 2: 147 255 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.470000000000e+02, best bound 1.470000000000e+02, gap 0.0000%
+Warning: linear constraint 0 and linear constraint 1 have the same name "Articulo-una-sola-vez"
+Warning: quadratic constraint 0 and quadratic constraint 1 have the same name "avoid-personal-conflicts"
+Warning: general constraint 0 and general constraint 1 have the same name "author-asistance"
