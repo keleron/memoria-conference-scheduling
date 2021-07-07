@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 #include "Solver.h"
+#include <ctime>
 
 using namespace std;
 
@@ -17,15 +18,16 @@ int main(int argc, char* argv[])
 
 	unordered_map<string, float> PARAMS;
 	PARAMS["-cr"] = 0.99;
-	PARAMS["-steps"] = 1000;
+	PARAMS["-steps"] = 10000;
 	PARAMS["-it"] = 100;
 	PARAMS["-mult"] = 1000;
-	PARAMS["-seed"] = 777;
+	PARAMS["-seed"] = -1;
 	PARAMS["-p1"] = 0.25;
 	PARAMS["-p2"] = 0.25;
 	PARAMS["-p3"] = 0.25;
 	PARAMS["-p4"] = 0.25;
 	string argument, last = "";
+
 
 	argument = string(argv[1]);
 	if (argument == "--help") {
@@ -49,6 +51,8 @@ int main(int argc, char* argv[])
 		if (argument.find("-") != string::npos) { last = argument; }
 		else { PARAMS[last] = stof(argument); }
 	}
+	if (!PARAMS["-seed"] == -1) { srand((int)PARAMS["-seed"]); }
+	else { srand(time(NULL)); }
 
 	string filename = argv[1];
 	Solver solver(PARAMS);

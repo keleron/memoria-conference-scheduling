@@ -1,1 +1,9 @@
-﻿  Memoria3.vcxproj -> C:\Users\Keleron\Desktop\memoria\code++\x64\Release\Main.exe
+﻿  main.cpp
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\main.cpp(19,22): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\main.cpp(23,24): warning C4244: '=': conversion from 'time_t' to 'float', possible loss of data
+  Generating code
+  2 of 1101 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Memoria3.vcxproj -> C:\Users\Keleron\Desktop\memoria\code++\x64\Release\Main.exe

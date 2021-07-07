@@ -17,7 +17,6 @@ float uniform() { return (float)rand() / (RAND_MAX); };
 Solver::Solver(unordered_map<string, float> PARAMS)
 {
 	this->PARAMS = PARAMS;
-	srand((int)this->PARAMS["-seed"]);
 }
 
 void Solver::read(string filename)

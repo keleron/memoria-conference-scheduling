@@ -25,3 +25,5 @@ Track.o: Track.cpp Track.h
 Utils.o: Utils.cpp Utils.h
 	g++ -Ofast -std=c++17 -c Utils.cpp
 
+clean:
+	rm *.o output
