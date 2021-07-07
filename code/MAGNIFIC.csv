@@ -1,0 +1,71 @@
+# ARTICULOS	HUMANOS TOTAL	BLOQUES	SALONES	TRACKS	ARTICULOS POR SESION	SESIONES POR DIA
+32	20	4	2	3	4	2
+#ARTICULO	TRACK	PRESENTADOR	BEST PAPER			
+0	0	0	1			
+1	0	1	0			
+2	0	2	0			
+3	0	3	0			
+4	0	4	1			
+5	0	5	0			
+6	0	6	0			
+7	0	7	1			
+8	1	8	0			
+9	1	9	1			
+10	1	10	0			
+11	1	11	0			
+12	1	12	0			
+13	1	13	0			
+14	1	14	0			
+15	1	0	0			
+16	0	1	0			
+17	0	2	0			
+18	0	3	0			
+19	0	4	0			
+20	1	5	0			
+21	1	6	0			
+22	1	7	0			
+23	1	8	1			
+24	2	9	1			
+25	2	10	0			
+26	2	11	0			
+27	2	12	0			
+28	2	13	0			
+29	2	14	0			
+30	2	0	0			
+31	2	1	0			
+#PERSONA	CONFLICTO (CON TIEMPO)					
+0	0					
+1	0					
+2	0					
+3	0					
+4	1					
+5	1					
+6	1					
+7	1					
+8	2					
+9	2					
+10	2					
+11	2					
+12	3					
+13	3					
+14	3					
+15	3					
+16						
+17						
+18						
+19						
+#TRACK	ASISTENTES HISTORICOS					
+0	10					
+1	10					
+2	10					
+#SALON	CAPACIDAD					
+0	10					
+1	10					
+#TRACK	CHAIRS					
+0	5	19				
+1	6	18				
+2	7	17				
+#TRACK	ORGANIZADORES					
+0	5	1	6			
+1	6	2	7			
+2	7	3	8			
