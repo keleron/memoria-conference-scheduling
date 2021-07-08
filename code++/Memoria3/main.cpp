@@ -45,18 +45,23 @@ int main(int argc, char* argv[])
 		cout << "    [-p4]      : Probability of swap two random articles (" << PARAMS["-p4"] << ")\n";
 		exit(1);
 	}
-	for (size_t i = 2; i < argc; i++)
+	for (int i = 2; i < argc; i++)
 	{
 		argument = string(argv[i]);
 		if (argument.find("-") != string::npos) { last = argument; }
 		else { PARAMS[last] = stof(argument); }
 	}
-	if (!PARAMS["-seed"] == -1) { srand((int)PARAMS["-seed"]); }
+	if (PARAMS["-seed"] != -1) {
+		cout << "SETTING CUSTOM SEED TO " << (int)PARAMS["-seed"] << "\n";
+		srand((int)PARAMS["-seed"]);
+	}
 	else { srand(time(NULL)); }
 
 	string filename = argv[1];
+	string filename_out = filename.substr(0, filename.size() - 3) + ".heu.sol";
+
 	Solver solver(PARAMS);
 	solver.read(filename);
 	solver.solve();
-	solver.writeSolution();
+	solver.writeSolution(filename_out);
 }

@@ -51,7 +51,7 @@ void Track::adjustArticlesInSessions()
 				//std::cout << "IF ARTICLE IS SCHEDULED THERE WILL FILL ALL THE BLOCKS\n";
 				continue;
 			}
-			if (session->articles.size() == solver->nAS) {
+			if (session->articles.size() == (size_t)solver->nAS) {
 				//std::cout << "SESSION REACH MAX ARTICLES\n";
 				continue;
 			}
@@ -64,7 +64,7 @@ void Track::adjustArticlesInSessions()
 		}
 		if (best_session_value == INT_MAX) {
 			for (const auto& session : sessions) {
-				if (session->articles.size() < solver->nAS) {
+				if (session->articles.size() < (size_t)solver->nAS) {
 					best_session = session;
 				}
 			}

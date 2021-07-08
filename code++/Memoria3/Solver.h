@@ -30,7 +30,7 @@ public:
 	vector<Session*> clusterArticles(vector<Article*> articles);
 	void buildGrid(vector<Session*> sessions);
 	int colCost(int col);
-	void writeSolution();
+	void writeSolution(string filename);
 
 };
 

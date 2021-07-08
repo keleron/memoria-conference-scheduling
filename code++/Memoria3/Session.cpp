@@ -26,7 +26,7 @@ void Session::mixForbidden()
 	int n = articles[0]->author->forbidden.size();
 	forbidden.resize(n, 0);
 	for (auto& article : articles) {
-		for (size_t i = 0; i < n; i++)
+		for (int i = 0; i < n; i++)
 		{
 			forbidden[i] = forbidden[i] || article->author->forbidden[i];
 		}
@@ -36,7 +36,4 @@ void Session::mixForbidden()
 
 void Session::updateForbidden()
 {
-	for (const auto& article : articles) {
-
-	}
 }

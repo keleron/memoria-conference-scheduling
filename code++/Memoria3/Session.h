@@ -9,7 +9,7 @@ class Article;
 class Session
 {
 public:
-	int id, row, col;
+	int id;
 	bool hasBest;
 	float cost;
 	vector<Article*> articles;

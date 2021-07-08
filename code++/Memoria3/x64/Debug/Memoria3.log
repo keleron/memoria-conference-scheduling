@@ -1,6 +1,8 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Memoria3.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  main.cpp
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\main.cpp(20,22): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\main.cpp(54,27): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\main.cpp(55,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Solver.cpp
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(160,90): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(173,98): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(184,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(185,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(186,61): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Memoria3.vcxproj -> C:\Users\Keleron\Desktop\memoria\code++\x64\Debug\Main.exe
