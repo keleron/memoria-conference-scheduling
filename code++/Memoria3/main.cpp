@@ -49,7 +49,10 @@ int main(int argc, char* argv[])
 	{
 		argument = string(argv[i]);
 		if (argument.find("-") != string::npos) { last = argument; }
-		else { PARAMS[last] = stof(argument); }
+		else {
+			PARAMS[last] = stof(argument);
+			cout << last << " : " << argument << "\n";
+		}
 	}
 	if (PARAMS["-seed"] != -1) {
 		cout << "SETTING CUSTOM SEED TO " << (int)PARAMS["-seed"] << "\n";

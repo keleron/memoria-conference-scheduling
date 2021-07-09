@@ -7,7 +7,6 @@
 #include <sstream>
 #include <algorithm>
 #include <random>
-#include <stdlib.h> 
 #include <unordered_map>
 
 using namespace std;
@@ -131,39 +130,70 @@ void Solver::solve()
 	};
 	for (size_t i = 0; i < sessions.size(); i++) grid[i / nB][i % nB] = sessions[i];
 
+	int total_cost = 0;
+	for (int i = 0; i < nB; i++) total_cost += colCost(i);
+	std::cout << "INFO: COST BEFORE EVERYTHING " << (int)total_cost << "\n";
 
-	//int step = 0;
 	int N = (int)PARAMS["-steps"];
-	//Session* sa, * sb;
-	float TEMP = PARAMS["-it"];;
+
+	float TEMP = total_cost * 2;
 	float cooldown = PARAMS["-cr"];
-	const float p1 = PARAMS["-p1"], p2 = PARAMS["-p2"], p3 = PARAMS["-p3"], p4 = PARAMS["-p4"];
+	float p1 = PARAMS["-p1"], p2 = PARAMS["-p2"], p3 = PARAMS["-p3"], p4 = PARAMS["-p4"];
+	bool weird_mode = false;
+	int bad_sol_counter = 0;
 
 	for (int i = 0; i < N; i++) {
+		//cout << "TEMPERATURE : " << TEMP << "\n";
+		//if (bad_sol_counter > 10) {
+		//	cout << "RE HEAT " << TEMP << "->" << TEMP * 1.1 << "\n";
+		//	TEMP *= 1.1;
+		//}
 		float chance = uniform();
 		if (chance < p1) {
 			int r1 = randint(nR), r2 = randint(nR), c1 = randint(nB), c2 = randint(nB);
-			//while (c1 == c2) c2 = randint(nB);
 			int delta = -(colCost(c1) + colCost(c2));
 			swap(grid[r1][c1], grid[r2][c2]);
 			delta += (colCost(c1) + colCost(c2));
-			//cout << "swaping " << "(" << r1 << "," << c1 << ")" << "x" << "(" << r2 << "," << c2 << ")\n";
-			//cout << "\t" << delta << "\n";
-			if (delta <= 0) continue;
-			if (exp((float)delta / TEMP) > uniform()) swap(grid[r1][c1], grid[r2][c2]);
+			//cout << "delta: " << delta << "\n";
+			//if (delta <= 0) continue;
+			if (delta > 0) {
+				if (weird_mode) {
+					if (exp((float)delta / TEMP) > uniform()) swap(grid[r1][c1], grid[r2][c2]);
+				}
+				else {
+					if (exp(-(float)delta / TEMP) <= uniform()) swap(grid[r1][c1], grid[r2][c2]);
+				}
+				bad_sol_counter++;
+			}
+			else {
+				bad_sol_counter = 0;
+			}
 		}
 		else if (chance < p1 + p2) {
 			int r = randint(nR), c = randint(nB);
-			while (!grid[r][c]) r = randint(nR), c = randint(nB);
+			while (!grid[r][c]) {
+				//cout << "stuck 1\n";
+				r = randint(nR), c = randint(nB);
+			}
 			int delta = -colCost(c);
 			Person* oldPerson = grid[r][c]->chair;
 			Person* newPerson = grid[r][c]->track->chairs[randint(grid[r][c]->track->chairs.size())];
 			grid[r][c]->chair = newPerson;
 			delta += colCost(c);
-			//cout << "changing chair of " << "(" << r << "," << c << ")\n";
-			//cout << "\t" << delta << "\n";
-			if (delta <= 0) continue;
-			if (exp((float)delta / TEMP) > uniform()) grid[r][c]->chair = oldPerson;
+			//cout << "delta: " << delta << "\n";
+			//if (delta <= 0) continue;
+			if (delta > 0) {
+				if (weird_mode) {
+					if (exp((float)delta / TEMP) > uniform()) grid[r][c]->chair = oldPerson;
+				}
+				else {
+					if (exp(-(float)delta / TEMP) <= uniform()) grid[r][c]->chair = oldPerson;
+				}
+				bad_sol_counter++;
+			}
+			else {
+				bad_sol_counter = 0;
+			}
 		}
 		else if (chance < p1 + p2 + p3) {
 			int r = randint(nR), c = randint(nB);
@@ -173,19 +203,29 @@ void Solver::solve()
 			Person* newPerson = grid[r][c]->track->organizers[randint(grid[r][c]->track->organizers.size())];
 			grid[r][c]->organizer = newPerson;
 			delta += colCost(c);
-			//cout << "changing organizer of " << "(" << r << "," << c << ")\n";
-			//cout << "\t" << delta << "\n";
-			if (delta <= 0) continue;
-			if (exp((float)delta / TEMP) > uniform()) grid[r][c]->organizer = oldPerson;
+			if (delta > 0) {
+				if (weird_mode) {
+					if (exp((float)delta / TEMP) > uniform()) grid[r][c]->organizer = oldPerson;
+				}
+				else {
+					if (exp(-(float)delta / TEMP) <= uniform()) grid[r][c]->organizer = oldPerson;
+				}
+				bad_sol_counter++;
+			}
+			else {
+				bad_sol_counter = 0;
+			}
 		}
 		else if (chance < p1 + p2 + p3 + p4) {
 			int t1 = randint(nT);
-			while (tracks[t1]->sessions.size() == 1) t1 = randint(nT);
+			while (tracks[t1]->sessions.size() == 1) {
+				//cout << "stuck 2\n";
+				t1 = randint(nT);
+			}
 			int s1 = randint(tracks[t1]->sessions.size());
 			int s2 = randint(tracks[t1]->sessions.size());
 			while (s1 == s2) s2 = randint(tracks[t1]->sessions.size());
 			int a1 = randint(nAS), a2 = randint(nAS);
-			//while (a1 == a2) a2 = randint(nAS);
 			Track* track = tracks[t1];
 			Session* session1 = track->sessions[s1];
 			Session* session2 = track->sessions[s2];
@@ -206,54 +246,34 @@ void Solver::solve()
 						c2 = b;
 						r2 = r;
 					}
-					if (c1 != -1 && c2 != -1 && r1 != -1 && r2 != -1) goto theEnd;
+					if (c1 != -1 && c2 != -1) goto theEnd;
 				}
 			}
 		theEnd:
 			int delta = -(colCost(c1) + colCost(c2));
 			swap(grid[r1][c1]->articles[a1], grid[r2][c2]->articles[a2]);
 			delta += (colCost(c1) + colCost(c2));
-			//int id1 = session1->articles[a1] ? session1->articles[a1]->id : -1;
-			//int id2 = session2->articles[a2] ? session2->articles[a2]->id : -1;
-			//cout << "swaping articles" << "(" << id1 << "x" << id2 << ") from (a place)\n";
-			//cout << "\t" << delta << "\n";
-			if (delta <= 0) continue;
-			if (exp((float)delta / TEMP) > uniform()) swap(grid[r1][c1]->articles[a1], grid[r2][c2]->articles[a2]);
+			//cout << "delta: " << delta << "\n";
+			//if (delta <= 0) continue;
+			if (delta > 0) {
+				if (weird_mode) {
+					if (exp((float)delta / (float)TEMP) > uniform()) swap(grid[r1][c1]->articles[a1], grid[r2][c2]->articles[a2]);
+				}
+				else {
+					if (exp(-(float)delta / (float)TEMP) <= uniform()) swap(grid[r1][c1]->articles[a1], grid[r2][c2]->articles[a2]);
+				}
+				bad_sol_counter++;
+			}
+			else {
+				bad_sol_counter = 0;
+			}
+
 		}
 		TEMP *= cooldown;
 	}
-	int total_cost = 0;
+	total_cost = 0;
 	for (int i = 0; i < nB; i++)	total_cost += colCost(i);
 	std::cout << "INFO: COST AFTER SA " << (int)total_cost << "\n";
-
-	//for (int b = 0; b < nB; b++)
-	//{
-	//	cout << "INITIAL COL COST " << colCost(b) << "\n";
-	//	vector<Session*> column;
-	//	for (int r = 0; r < nR; r++) column.push_back(grid[r][b]);
-	//	sort(column.begin(), column.end());
-	//	vector<Session*> best_order;
-	//	int best_cost = INT_MAX;
-	//	do {
-	//		int local_cost = 0;
-	//		for (int r = 0; r < nR; r++)
-	//		{
-	//			if (!column[r]) continue;
-	//			int waste = (column[r]->track->attendance - rooms[r]->capacity);
-	//			local_cost += waste > 0 ? waste : 0;
-	//		}
-	//		if (local_cost < best_cost) {
-	//			best_cost = local_cost;
-	//			best_order = column;
-	//		}
-	//	} while (next_permutation(column.begin(), column.end()));
-	//	for (int r = 0; r < nR; r++) {
-	//		grid[r][b] = best_order[r];
-	//	}
-	//}
-	//total_cost = 0;
-	//for (int i = 0; i < nB; i++)	total_cost += colCost(i);
-	//std::cout << "INFO: COST AFTER GREEDY POLISH " << (int)total_cost << "\n";
 }
 
 vector<Session*> Solver::clusterArticles(vector<Article*> articles)
@@ -287,7 +307,6 @@ int Solver::colCost(int col)
 {
 	int cost = 0;
 	int COST_AMPLIFIER = (int)PARAMS["-mult"];
-	//Session* session;
 	unordered_map<int, int> counter;
 	for (int i = 0; i < nR; i++)
 	{
@@ -320,9 +339,6 @@ int Solver::colCost(int col)
 					cost += (a1->author == a2->author ? 1 : 0) * COST_AMPLIFIER;
 				}
 			}
-			/*if (cost > 1000) {
-				cout << "cost-inside: " << i << "," << j << "\t" << cost << "\n";
-			}*/
 		}
 	}
 	return cost;
