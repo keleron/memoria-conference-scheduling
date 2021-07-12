@@ -23,6 +23,9 @@ int main(int argc, char* argv[])
 	PARAMS["-p4"] = 0.25;
 	PARAMS["-weird"] = 0;
 	PARAMS["-v"] = 0;
+	PARAMS["-stuck"] = 10000;
+	PARAMS["-reheat"] = 1000;
+
 	string argument, last = "";
 
 
@@ -41,6 +44,8 @@ int main(int argc, char* argv[])
 		//cout << "    [-it]      : Initial Temperature (" << PARAMS["-it"] << ")\n";
 		cout << "    [-mult]    : Multiplier for hard constraint (" << PARAMS["-mult"] << ")\n";
 		cout << "    [-seed]    : Random Seed (" << PARAMS["-seed"] << ")\n";
+		cout << "    [-stuck]   : Number of bad solutions to reheat (" << PARAMS["-stuck"] << ")\n";
+		cout << "    [-reheat]  : Reheat factor to increase temperature (" << PARAMS["-reheat"] << ")\n";
 		cout << "  special ones for each one of the iter of Simulated Annealing:\n";
 		cout << "    [-p1]      : Probability of swap two entire sessions (" << PARAMS["-p1"] << ")\n";
 		cout << "    [-p2]      : Probability of switch a random chair (" << PARAMS["-p2"] << ")\n";

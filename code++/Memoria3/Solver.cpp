@@ -149,11 +149,11 @@ void Solver::solve()
 
 	for (int i = 0; i < N; i++) {
 
-		if (bad_sol_counter > 10000) {
+		if (bad_sol_counter > PARAMS["-stuck"]) {
 			int local_full_cost = 0;
 			for (int i = 0; i < nB; i++) local_full_cost += colCost(i);
 			if (local_full_cost < global_best) global_best = local_full_cost;
-			float new_temp = TEMP + (1000 - 999 * (float)i / (float)N);
+			float new_temp = TEMP + (PARAMS["-reheat"] - (PARAMS["-reheat"] - 1) * (float)i / (float)N);
 			if (PARAMS["-v"] > 0) cout << i << " LOCAL OPTIMA IN " << local_full_cost << " NEED RE HEAT " << TEMP << "->" << new_temp << "\n";
 			TEMP = new_temp;
 			bad_sol_counter = 0;
@@ -219,7 +219,7 @@ void Solver::solve()
 				bad_sol_counter = 0;
 			}
 		}
-		else if (chance < p1 + p2 + p3 + p4) {
+		else if (chance <= p1 + p2 + p3 + p4) {
 			int t1 = randint(nT);
 			while (tracks[t1]->sessions.size() == 1) t1 = randint(nT);
 			int s1 = randint(tracks[t1]->sessions.size());
