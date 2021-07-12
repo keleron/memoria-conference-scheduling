@@ -8,8 +8,11 @@
 #include <algorithm>
 #include <random>
 #include <unordered_map>
+#include <iomanip>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 int randint(int N = 0) { return rand() % N; }
 float uniform() { return (float)rand() / (RAND_MAX); };
@@ -104,12 +107,13 @@ void Solver::reserve()
 	for (int i = 0; i < nT; i++) tracks.push_back(new Track(i, this));
 	for (int i = 0; i < nR; i++) rooms.push_back(new Room(i));
 	for (int i = 0; i < nP; i++) people.push_back(new Person(i, nB));
-	cout << "INFO: RESERVED SPACE\n";
 }
 
 void Solver::solve()
 {
-	cout << "INFO: INIT CLUSTER SESSIONING\n";
+
+	if (PARAMS["-v"] > 0) cout << "INFO: RUNNING CREATION OF SESSIONS\n";
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	for (const auto& track : tracks) {
 		track->fillSessions(nAS);
 		track->adjustArticlesInSessions();
@@ -132,31 +136,35 @@ void Solver::solve()
 
 	int total_cost = 0;
 	for (int i = 0; i < nB; i++) total_cost += colCost(i);
-	std::cout << "INFO: COST BEFORE EVERYTHING " << (int)total_cost << "\n";
+	if (PARAMS["-v"] > 0) cout << "\nINFO: INITIAL COST " << total_cost << "\n";
 
 	int N = (int)PARAMS["-steps"];
 
 	float TEMP = total_cost * 2;
 	float cooldown = PARAMS["-cr"];
 	float p1 = PARAMS["-p1"], p2 = PARAMS["-p2"], p3 = PARAMS["-p3"], p4 = PARAMS["-p4"];
-	bool weird_mode = false;
+	bool weird_mode = (bool)PARAMS["-weird"];
 	int bad_sol_counter = 0;
+	int global_best = INT_MAX;
 
 	for (int i = 0; i < N; i++) {
-		//cout << "TEMPERATURE : " << TEMP << "\n";
-		//if (bad_sol_counter > 10) {
-		//	cout << "RE HEAT " << TEMP << "->" << TEMP * 1.1 << "\n";
-		//	TEMP *= 1.1;
-		//}
+
+		if (bad_sol_counter > 10000) {
+			int local_full_cost = 0;
+			for (int i = 0; i < nB; i++) local_full_cost += colCost(i);
+			if (local_full_cost < global_best) global_best = local_full_cost;
+			float new_temp = TEMP + (1000 - 999 * (float)i / (float)N);
+			if (PARAMS["-v"] > 0) cout << i << " LOCAL OPTIMA IN " << local_full_cost << " NEED RE HEAT " << TEMP << "->" << new_temp << "\n";
+			TEMP = new_temp;
+			bad_sol_counter = 0;
+		}
 		float chance = uniform();
 		if (chance < p1) {
 			int r1 = randint(nR), r2 = randint(nR), c1 = randint(nB), c2 = randint(nB);
 			int delta = -(colCost(c1) + colCost(c2));
 			swap(grid[r1][c1], grid[r2][c2]);
 			delta += (colCost(c1) + colCost(c2));
-			//cout << "delta: " << delta << "\n";
-			//if (delta <= 0) continue;
-			if (delta > 0) {
+			if (delta >= 0) {
 				if (weird_mode) {
 					if (exp((float)delta / TEMP) > uniform()) swap(grid[r1][c1], grid[r2][c2]);
 				}
@@ -171,18 +179,13 @@ void Solver::solve()
 		}
 		else if (chance < p1 + p2) {
 			int r = randint(nR), c = randint(nB);
-			while (!grid[r][c]) {
-				//cout << "stuck 1\n";
-				r = randint(nR), c = randint(nB);
-			}
+			while (!grid[r][c]) r = randint(nR), c = randint(nB);
 			int delta = -colCost(c);
 			Person* oldPerson = grid[r][c]->chair;
 			Person* newPerson = grid[r][c]->track->chairs[randint(grid[r][c]->track->chairs.size())];
 			grid[r][c]->chair = newPerson;
 			delta += colCost(c);
-			//cout << "delta: " << delta << "\n";
-			//if (delta <= 0) continue;
-			if (delta > 0) {
+			if (delta >= 0) {
 				if (weird_mode) {
 					if (exp((float)delta / TEMP) > uniform()) grid[r][c]->chair = oldPerson;
 				}
@@ -203,7 +206,7 @@ void Solver::solve()
 			Person* newPerson = grid[r][c]->track->organizers[randint(grid[r][c]->track->organizers.size())];
 			grid[r][c]->organizer = newPerson;
 			delta += colCost(c);
-			if (delta > 0) {
+			if (delta >= 0) {
 				if (weird_mode) {
 					if (exp((float)delta / TEMP) > uniform()) grid[r][c]->organizer = oldPerson;
 				}
@@ -218,10 +221,7 @@ void Solver::solve()
 		}
 		else if (chance < p1 + p2 + p3 + p4) {
 			int t1 = randint(nT);
-			while (tracks[t1]->sessions.size() == 1) {
-				//cout << "stuck 2\n";
-				t1 = randint(nT);
-			}
+			while (tracks[t1]->sessions.size() == 1) t1 = randint(nT);
 			int s1 = randint(tracks[t1]->sessions.size());
 			int s2 = randint(tracks[t1]->sessions.size());
 			while (s1 == s2) s2 = randint(tracks[t1]->sessions.size());
@@ -253,9 +253,7 @@ void Solver::solve()
 			int delta = -(colCost(c1) + colCost(c2));
 			swap(grid[r1][c1]->articles[a1], grid[r2][c2]->articles[a2]);
 			delta += (colCost(c1) + colCost(c2));
-			//cout << "delta: " << delta << "\n";
-			//if (delta <= 0) continue;
-			if (delta > 0) {
+			if (delta >= 0) {
 				if (weird_mode) {
 					if (exp((float)delta / (float)TEMP) > uniform()) swap(grid[r1][c1]->articles[a1], grid[r2][c2]->articles[a2]);
 				}
@@ -271,9 +269,10 @@ void Solver::solve()
 		}
 		TEMP *= cooldown;
 	}
-	total_cost = 0;
-	for (int i = 0; i < nB; i++)	total_cost += colCost(i);
-	std::cout << "INFO: COST AFTER SA " << (int)total_cost << "\n";
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	auto duration = duration_cast<seconds>(t2 - t1).count();
+	cout << "INFO: BEST COST FOUND " << global_best << "\n";
+	cout << "INFO: TIME ELAPSED " << duration << "[s]\n";
 }
 
 vector<Session*> Solver::clusterArticles(vector<Article*> articles)
@@ -308,36 +307,35 @@ int Solver::colCost(int col)
 	int cost = 0;
 	int COST_AMPLIFIER = (int)PARAMS["-mult"];
 	unordered_map<int, int> counter;
+	int nASCOST = nAS * COST_AMPLIFIER;
 	for (int i = 0; i < nR; i++)
 	{
 		if (grid[i][col] == nullptr) { continue; }
 		int waste = (grid[i][col]->track->attendance - rooms[i]->capacity);
 		cost += waste > 0 ? waste : 0;
-		cost += grid[i][col]->chair->forbidden[col] * nAS * COST_AMPLIFIER;
-		cost += grid[i][col]->organizer->forbidden[col] * nAS * COST_AMPLIFIER;
+		cost += grid[i][col]->chair->forbidden[col] * nASCOST;
+		cost += grid[i][col]->organizer->forbidden[col] * nASCOST;
 		for (const auto& a1 : grid[i][col]->articles)
 		{
-			if (a1) cost += a1->author->forbidden[col] * nAS * COST_AMPLIFIER;
+			if (a1) cost += a1->author->forbidden[col] * nASCOST;
 		}
-
 		for (int j = i + 1; j < nR; j++)
 		{
 			if (grid[j][col] == nullptr) { continue; }
-			cost += (grid[i][col]->chair == grid[j][col]->chair) * nAS * COST_AMPLIFIER;
-			cost += (grid[i][col]->organizer == grid[j][col]->organizer) * nAS * COST_AMPLIFIER;
-			cost += (grid[i][col]->track == grid[j][col]->track) * nAS * COST_AMPLIFIER;
-
-			for (const auto& a1 : grid[i][col]->articles) {
-				if (a1 == nullptr) { continue; }
-				cost += (a1->author == grid[j][col]->chair) * nAS * COST_AMPLIFIER;
-				cost += (a1->author == grid[j][col]->organizer) * nAS * COST_AMPLIFIER;
-
-				for (const auto& a2 : grid[j][col]->articles) {
-					if (a2 == nullptr) { continue; }
-					cost += (grid[i][col]->chair == a2->author) * nAS * COST_AMPLIFIER;
-					cost += (grid[i][col]->organizer == a2->author) * nAS * COST_AMPLIFIER;
-					cost += (a1->author == a2->author ? 1 : 0) * COST_AMPLIFIER;
-				}
+			cost += (grid[i][col]->chair == grid[j][col]->chair) * nASCOST;
+			cost += (grid[i][col]->organizer == grid[j][col]->organizer) * nASCOST;
+			cost += (grid[i][col]->track == grid[j][col]->track) * nASCOST;
+			for (size_t a1 = 0; a1 < nAS; a1++)
+			{
+				Article* aa1 = grid[i][col]->articles[a1];
+				Article* aa2 = grid[j][col]->articles[a1];
+				if (aa1 == nullptr || aa2 == nullptr) { continue; }
+				cost += (aa1->author == grid[j][col]->chair) * nASCOST;
+				cost += (aa1->author == grid[j][col]->organizer) * nASCOST;
+				cost += (grid[i][col]->chair == aa2->author) * nASCOST;
+				cost += (grid[i][col]->organizer == aa2->author) * nASCOST
+					;
+				cost += (aa1->author == aa2->author ? 1 : 0) * COST_AMPLIFIER;
 			}
 		}
 	}

@@ -1,9 +1,13 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Memoria3.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Solver.cpp
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(139,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(149,15): warning C4305: '*=': truncation from 'double' to 'float'
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(175,90): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(193,98): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(212,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(213,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(140,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(177,90): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(198,98): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(220,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(221,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\Solver.cpp(222,61): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\main.cpp(16,23): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Keleron\Desktop\memoria\code++\Memoria3\main.cpp(66,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   Memoria3.vcxproj -> C:\Users\Keleron\Desktop\memoria\code++\x64\Debug\Main.exe
