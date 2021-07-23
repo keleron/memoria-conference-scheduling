@@ -72,10 +72,8 @@ for s in range(nS):
         waste[s][r] = abs(rooms[r].capacity-tracks[tt].attendance)
 
 m = gp.Model("simple")
-# x = m.addVars(nA, nS, vtype=GRB.BINARY, name='x')
 x = m.addVars(nA, nS, nAS, vtype=GRB.BINARY, name='x')
 y = m.addVars(nS, nR, nB, vtype=GRB.BINARY, name='y')
-# w = m.addVars(nP, nS, vtype=GRB.BINARY, name='w')
 w = m.addVars(nP, nS, nAS, vtype=GRB.BINARY, name='w')
 bb = m.addVars(nS, vtype=GRB.BINARY, name='bb')
 z = m.addVar(vtype=GRB.INTEGER, name='z')
@@ -141,14 +139,6 @@ for p in range(nP):
                 for b in people[p].conflicts:
                     m.addConstr(w[p, s, l]*y[s, r, b] == 0,
                                 name="avoid-personal-conflicts")
-
-# SKIP ROOM SIZE
-# for s in range(nS):
-#     for r in range(nR):
-#         tt = sessions[s]
-#         if tracks[tt].attendance > rooms[r].capacity:
-#             for b in range(nB):
-#                 m.addConstr(y[s, r, b] == 0, name="room-capacity")
 
 m.addConstr(z == sum(y[s, r, b]*waste[s][r]
             for s in range(nS) for r in range(nR) for b in range(nB)), name="objective")

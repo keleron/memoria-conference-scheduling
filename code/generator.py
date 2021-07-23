@@ -32,10 +32,26 @@ def jls_extract_def(nA, nP, nR, nB, nAS, nT, nConf):
             new_article = Article(a, tt, 0, 0)
             articles.append(new_article)
             tracks[tt].articles.append(new_article)
+
         for a in range(nA-4, nA):
             new_article = Article(a, nT-1, 0, 1)
             articles.append(new_article)
             tracks[tt].articles.append(new_article)
+
+        for t in range(nT):
+            tracks[t].sessions = ceil(len(tracks[t].articles)/nAS)
+
+        nS = sum(tracks[t].sessions for t in range(nT))
+        if (nS > nR*nB or (nR*nB-nS > 2)):
+            fp.close()
+            os.remove("instances/"+filename)
+            return 0
+
+        for track in tracks:
+            if track.sessions > nB:
+                fp.close()
+                os.remove("instances/"+filename)
+                return 0
 
         shuffle(articles)
 
@@ -50,9 +66,6 @@ def jls_extract_def(nA, nP, nR, nB, nAS, nT, nConf):
             size = choice([3, 4])
             for a in sample(track.articles, size):
                 a.best = 1
-
-        # for track in tracks[-4:]:
-        #     sample(track.articles, 1)[0].best = 1
 
         articles.sort(key=lambda x: x.id)
         for a in articles:
@@ -91,28 +104,27 @@ def jls_extract_def(nA, nP, nR, nB, nAS, nT, nConf):
             print(t, rr(nP), rr(nP), rr(nP))
     print(filename)
     fp.close()
-    return
+    return 1
 
 
-posibles = [
-    [5, 8, 5],
-    [5, 9, 5],
-    [6, 7, 5],
-    [6, 8, 4],
-    [6, 9, 4],
-    [7, 6, 5],
-    [7, 7, 4],
-    [7, 8, 4],
-    [8, 6, 4],
-    [8, 7, 4],
-]
-conf = [0.10, 0.20, 0.30]
-people = [170, 150, 130]
+# GECCO 8x7
 
-jls_extract_def(55, 50, 4, 4, 4, 14, 0.12)
-exit("done!")
+articulos = [173]
+tracks = [14]
+salones = [5, 6, 7, 8, 9]
+bloques = [6, 7, 8, 9]
+por_session = [4, 5]
+personas = [130, 150, 170]
+conflictos = [0.10, 0.20, 0.30]
 
-for a, b, c in posibles:
-    for p in people:
-        for cc in conf:
-            jls_extract_def(173, p, a, b, c, 14, cc)
+total = 0
+for a in articulos:
+    for t in tracks:
+        for r in salones:
+            for b in bloques:
+                for l in por_session:
+                    for p in personas:
+                        for cc in conflictos:
+                            total += jls_extract_def(a, p, r, b, l, t, cc)
+
+print("instances generated", total)
