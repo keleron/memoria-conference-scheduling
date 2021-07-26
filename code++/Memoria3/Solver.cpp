@@ -112,7 +112,7 @@ void Solver::reserve()
 void Solver::solve()
 {
 
-	if (PARAMS["-v"] > 0) cout << "INFO: RUNNING CREATION OF SESSIONS\n";
+	if (PARAMS["-v"] > 2) cout << "INFO: RUNNING CREATION OF SESSIONS\n";
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	for (const auto& track : tracks) {
 		track->fillSessions(nAS);
@@ -154,10 +154,17 @@ void Solver::solve()
 			for (int i = 0; i < nB; i++) local_full_cost += colCost(i);
 			if (local_full_cost < global_best) global_best = local_full_cost;
 			float new_temp = TEMP + (PARAMS["-reheat"] - (PARAMS["-reheat"] - 1) * (float)i / (float)N);
-			if (PARAMS["-v"] > 0) cout << i << " LOCAL OPTIMA IN " << local_full_cost << " NEED RE HEAT " << TEMP << "->" << new_temp << "\n";
+			if (PARAMS["-v"] > 2) cout << i << " LOCAL OPTIMA IN " << local_full_cost << " NEED RE HEAT " << TEMP << "->" << new_temp << "\n";
 			TEMP = new_temp;
 			bad_sol_counter = 0;
 		}
+		//int total_cost = 0;
+		//for (size_t b = 0; b < nB; b++)
+		//{
+		//	total_cost += colCost(b);
+		//}
+		//cout << total_cost << ";";
+
 		float chance = uniform();
 		if (chance < p1) {
 			int r1 = randint(nR), r2 = randint(nR), c1 = randint(nB), c2 = randint(nB);
@@ -271,8 +278,7 @@ void Solver::solve()
 	}
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	auto duration = duration_cast<seconds>(t2 - t1).count();
-	cout << "INFO: BEST COST FOUND " << global_best << "\n";
-	cout << "INFO: TIME ELAPSED " << duration << "[s]\n";
+	cout << global_best << ";" << duration << "\n";
 }
 
 vector<Session*> Solver::clusterArticles(vector<Article*> articles)

@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 
 	unordered_map<string, float> PARAMS;
 	PARAMS["-cr"] = 0.999;
-	PARAMS["-steps"] = 10000000;
+	PARAMS["-steps"] = 10000000 / 2;
 	PARAMS["-mult"] = 1000;
 	PARAMS["-seed"] = -1;
 	PARAMS["-p1"] = 0.25;
@@ -41,7 +41,6 @@ int main(int argc, char* argv[])
 		cout << "  options:\n";
 		cout << "    [-cr]      : Cooling Rate (" << PARAMS["-cr"] << ")\n";
 		cout << "    [-steps]   : Steps of Simulated Annealing (" << PARAMS["-steps"] << ")\n";
-		//cout << "    [-it]      : Initial Temperature (" << PARAMS["-it"] << ")\n";
 		cout << "    [-mult]    : Multiplier for hard constraint (" << PARAMS["-mult"] << ")\n";
 		cout << "    [-seed]    : Random Seed (" << PARAMS["-seed"] << ")\n";
 		cout << "    [-stuck]   : Number of bad solutions to reheat (" << PARAMS["-stuck"] << ")\n";
@@ -61,17 +60,17 @@ int main(int argc, char* argv[])
 		if (argument.find("-") != string::npos) { last = argument; }
 		else {
 			PARAMS[last] = stof(argument);
-			cout << last << " : " << argument << "\n";
+			if (PARAMS["-v"] > 1) cout << last << " : " << argument << "\n";
 		}
 	}
 	if (PARAMS["-seed"] != -1) {
-		cout << "SETTING CUSTOM SEED TO " << (int)PARAMS["-seed"] << "\n";
+		if (PARAMS["-v"] > 1) cout << "-seed : " << (int)PARAMS["-seed"] << "\n";
 		srand((int)PARAMS["-seed"]);
 	}
 	else { srand(time(NULL)); }
 
 	string filename = argv[1];
-	cout << filename << "\n";
+	cout << filename << ";" << PARAMS["-seed"] << ";";
 	string filename_out = filename.substr(0, filename.size() - 3) + ".heu.sol";
 
 	Solver solver(PARAMS);

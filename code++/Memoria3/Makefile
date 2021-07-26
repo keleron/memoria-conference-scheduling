@@ -1,5 +1,6 @@
 output: main.o Article.o Person.o Room.o Session.o Solver.o Track.o Utils.o
 	g++ -Ofast -Wall main.o Article.o Person.o Room.o Session.o Solver.o Track.o Utils.o -o output
+	cp output ../../code/instances/output
 
 main.o: main.cpp
 	g++ -Ofast -Wall -std=c++17 -c main.cpp

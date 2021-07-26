@@ -412,5 +412,8 @@ FodyWeavers.xsd
 .idea/
 *.sln.iml
 
-**/Debug
-**/Release
+**/**/Debug
+**/**/Release
+**/**/x64
+Memoria3/*.o
+Memoria3/output

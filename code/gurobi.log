@@ -9646,3 +9646,861 @@ Solution count 0
 
 Model is infeasible
 Best objective -, best bound -, gap -
+============================================================
+[INFO]: STARTING A173-P130-R6-B9-L4-T14-C0.2.cs
+
+Gurobi 9.1.1 (win64) logging started Sat Jul 24 00:10:04 2021
+
+Academic license - for non-commercial use only - expires 2021-08-11
+Using license file C:\Users\Keleron\gurobi.lic
+Using gurobi.env file
+Set parameter TimeLimit to value 3600
+Set parameter LogFile to value gurobi.log
+Set parameter LogToConsole to value 0
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 1876297 rows, 1569119 columns and 9819812 nonzeros
+Model fingerprint: 0x58b81569
+Variable types: 0 continuous, 1569119 integer (1569118 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 5e+02]
+  Objective range  [1e+00, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+00]
+Presolve removed 45894 rows and 47976 columns (presolve time = 5s) ...
+Presolve removed 370338 rows and 47976 columns (presolve time = 10s) ...
+Presolve removed 475729 rows and 47976 columns (presolve time = 15s) ...
+Presolve removed 565796 rows and 47976 columns (presolve time = 20s) ...
+Presolve removed 612603 rows and 47976 columns (presolve time = 25s) ...
+Presolve removed 614080 rows and 345624 columns (presolve time = 31s) ...
+Presolve removed 614080 rows and 345624 columns (presolve time = 35s) ...
+Presolve removed 617238 rows and 345624 columns (presolve time = 40s) ...
+Presolve removed 619486 rows and 345624 columns (presolve time = 45s) ...
+Presolve removed 619486 rows and 345624 columns (presolve time = 50s) ...
+Presolve removed 619486 rows and 345624 columns (presolve time = 55s) ...
+Presolve removed 619486 rows and 345624 columns (presolve time = 64s) ...
+Presolve removed 619486 rows and 568680 columns (presolve time = 164s) ...
+Presolve removed 845944 rows and 568720 columns (presolve time = 166s) ...
+Presolve removed 845944 rows and 568724 columns (presolve time = 172s) ...
+Presolve removed 845944 rows and 568724 columns
+Presolve time: 172.44s
+Presolved: 1030353 rows, 1000395 columns, 6142013 nonzeros
+Variable types: 0 continuous, 1000395 integer (1000395 binary)
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 15s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Elapsed ordering time = 30s
+Elapsed ordering time = 35s
+Ordering time: 39.95s
+
+Barrier performed 0 iterations in 245.03 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.08s
+
+Solved with dual simplex
+
+Root relaxation: objective 3.300000e+01, 20083 iterations, 48.83 seconds
+Total elapsed time = 315.29s
+Total elapsed time = 329.73s
+Total elapsed time = 333.36s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   33.00000    0 1126          -   33.00000      -     -  395s
+H    0     0                      41.0000000   33.00000  19.5%     -  421s
+H    0     0                      35.0000000   33.00000  5.71%     -  428s
+     0     0   33.00000    0  646   35.00000   33.00000  5.71%     -  710s
+     0     0   33.00000    0  575   35.00000   33.00000  5.71%     - 1109s
+H    0     0                      34.0000000   33.00000  2.94%     - 1117s
+     0     0   33.00000    0   80   34.00000   33.00000  2.94%     - 1174s
+     0     0   33.00000    0  136   34.00000   33.00000  2.94%     - 1377s
+H    0     0                      33.0000000   33.00000  0.00%     - 1380s
+     0     0   33.00000    0  136   33.00000   33.00000  0.00%     - 1380s
+
+Explored 1 nodes (271480 simplex iterations) in 1380.63 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 4: 33 34 35 41 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.300000000000e+01, best bound 3.300000000000e+01, gap 0.0000%
+============================================================
+[INFO]: STARTING A173-P170-R6-B7-L5-T14-C0.1.cs
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 1660228 rows, 1511881 columns and 9128105 nonzeros
+Model fingerprint: 0xb33395bb
+Variable types: 0 continuous, 1511881 integer (1511880 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 9e+02]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Presolve removed 41058 rows and 45766 columns (presolve time = 5s) ...
+Presolve removed 225574 rows and 45766 columns (presolve time = 10s) ...
+Presolve removed 294694 rows and 45766 columns (presolve time = 15s) ...
+Presolve removed 308094 rows and 45766 columns (presolve time = 20s) ...
+Presolve removed 309042 rows and 188566 columns (presolve time = 26s) ...
+Presolve removed 309042 rows and 188566 columns (presolve time = 30s) ...
+Presolve removed 309242 rows and 188566 columns (presolve time = 35s) ...
+Presolve removed 309242 rows and 188566 columns (presolve time = 40s) ...
+Presolve removed 309242 rows and 188566 columns (presolve time = 47s) ...
+Presolve removed 309242 rows and 272464 columns (presolve time = 132s) ...
+Presolve removed 309242 rows and 272464 columns (presolve time = 143s) ...
+Presolve removed 394367 rows and 272464 columns (presolve time = 145s) ...
+Presolve removed 394379 rows and 272464 columns (presolve time = 150s) ...
+Presolve removed 394386 rows and 272464 columns (presolve time = 156s) ...
+Presolve removed 394386 rows and 272464 columns
+Presolve time: 156.25s
+Presolved: 1265842 rows, 1239417 columns, 7423996 nonzeros
+Variable types: 0 continuous, 1239417 integer (1239417 binary)
+Found heuristic solution: objective 70.0000000
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 15s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Elapsed ordering time = 30s
+Elapsed ordering time = 35s
+Elapsed ordering time = 40s
+Elapsed ordering time = 45s
+Elapsed ordering time = 50s
+Ordering time: 53.92s
+
+Barrier performed 0 iterations in 251.05 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 1.17s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.100000e+01, 26381 iterations, 60.94 seconds
+Total elapsed time = 333.55s
+Total elapsed time = 348.18s
+Total elapsed time = 369.24s
+Total elapsed time = 388.18s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   21.00000    0  873   70.00000   21.00000  70.0%     -  470s
+H    0     0                      26.0000000   21.00000  19.2%     -  477s
+H    0     0                      22.0000000   21.00000  4.55%     -  481s
+     0     0   21.00000    0  420   22.00000   21.00000  4.55%     -  645s
+     0     0   21.00000    0  341   22.00000   21.00000  4.55%     - 1442s
+H    0     0                      21.0000000   21.00000  0.00%     - 1449s
+     0     0   21.00000    0  341   21.00000   21.00000  0.00%     - 1449s
+
+Explored 1 nodes (135416 simplex iterations) in 1450.42 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 4: 21 22 26 70 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.100000000000e+01, best bound 2.100000000000e+01, gap 0.0000%
+============================================================
+[INFO]: STARTING A173-P130-R5-B8-L5-T14-C0.1.cs
+
+Gurobi 9.1.1 (win64) logging started Sat Jul 24 17:17:40 2021
+
+Academic license - for non-commercial use only - expires 2021-08-11
+Using license file C:\Users\Keleron\gurobi.lic
+Using gurobi.env file
+Set parameter TimeLimit to value 3600
+Set parameter LogFile to value gurobi.log
+Set parameter LogToConsole to value 0
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 1224451 rows, 1112601 columns and 6713510 nonzeros
+Model fingerprint: 0x7a73e684
+Variable types: 0 continuous, 1112601 integer (1112600 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 7e+02]
+  Objective range  [1e+00, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Presolve removed 158052 rows and 42579 columns (presolve time = 5s) ...
+Presolve removed 234105 rows and 42582 columns (presolve time = 10s) ...
+Presolve removed 270114 rows and 181007 columns (presolve time = 15s) ...
+Presolve removed 270133 rows and 181082 columns (presolve time = 20s) ...
+Presolve removed 270223 rows and 181097 columns (presolve time = 27s) ...
+Presolve removed 270223 rows and 237217 columns (presolve time = 66s) ...
+Presolve removed 270223 rows and 237217 columns (presolve time = 71s) ...
+Presolve removed 327385 rows and 237217 columns (presolve time = 78s) ...
+Presolve removed 327385 rows and 237217 columns
+Presolve time: 78.00s
+Presolved: 897066 rows, 875384 columns, 5233464 nonzeros
+Variable types: 0 continuous, 875384 integer (875384 binary)
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 15s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Elapsed ordering time = 30s
+Elapsed ordering time = 35s
+Ordering time: 35.23s
+
+Barrier performed 0 iterations in 130.71 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.08s
+
+Solved with dual simplex
+
+Root relaxation: objective 1.340000e+02, 21452 iterations, 40.83 seconds
+Total elapsed time = 195.01s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  134.00000    0 1435          -  134.00000      -     -  254s
+     0     0  134.00000    0 2634          -  134.00000      -     -  369s
+     0     0  134.00000    0 2528          -  134.00000      -     -  508s
+     0     0  134.00000    0 1525          -  134.00000      -     -  931s
+     0     0  134.00000    0 1635          -  134.00000      -     - 1035s
+     0     0  134.00000    0  747          -  134.00000      -     - 1458s
+H    0     0                     139.0000000  134.00000  3.60%     - 1461s
+     0     0  134.00000    0  999  139.00000  134.00000  3.60%     - 1495s
+     0     0  134.00000    0 1071  139.00000  134.00000  3.60%     - 1693s
+     0     0  134.00000    0  170  139.00000  134.00000  3.60%     - 2090s
+H    0     0                     134.0000000  134.00000  0.00%     - 2093s
+     0     0  134.00000    0  170  134.00000  134.00000  0.00%     - 2093s
+
+Explored 1 nodes (301067 simplex iterations) in 2093.86 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 2: 134 139 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.340000000000e+02, best bound 1.340000000000e+02, gap 0.0000%
+============================================================
+[INFO]: STARTING A173-P130-R5-B8-L5-T14-C0.2.cs
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 1328451 rows, 1112601 columns and 6921630 nonzeros
+Model fingerprint: 0xc4feefa8
+Variable types: 0 continuous, 1112601 integer (1112600 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 7e+02]
+  Objective range  [1e+00, 8e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Presolve removed 256305 rows and 42576 columns (presolve time = 5s) ...
+Presolve removed 367131 rows and 42576 columns (presolve time = 10s) ...
+Presolve removed 435385 rows and 42576 columns (presolve time = 15s) ...
+Presolve removed 436789 rows and 250576 columns (presolve time = 20s) ...
+Presolve removed 436989 rows and 250576 columns (presolve time = 25s) ...
+Presolve removed 436989 rows and 250576 columns (presolve time = 31s) ...
+Presolve removed 436989 rows and 250576 columns (presolve time = 35s) ...
+Presolve removed 436989 rows and 250576 columns (presolve time = 41s) ...
+Presolve removed 436989 rows and 386962 columns (presolve time = 96s) ...
+Presolve removed 436989 rows and 386965 columns (presolve time = 101s) ...
+Presolve removed 576300 rows and 387072 columns (presolve time = 107s) ...
+Presolve removed 576300 rows and 387072 columns
+Presolve time: 107.10s
+Presolved: 752151 rows, 725529 columns, 4422679 nonzeros
+Variable types: 0 continuous, 725529 integer (725529 binary)
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 15s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Elapsed ordering time = 30s
+Elapsed ordering time = 35s
+Elapsed ordering time = 40s
+Elapsed ordering time = 45s
+Elapsed ordering time = 50s
+Ordering time: 50.14s
+
+Barrier performed 0 iterations in 179.61 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.06s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.100000e+01, 24782 iterations, 55.34 seconds
+Total elapsed time = 180.16s
+Total elapsed time = 248.16s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   21.00000    0 1157          -   21.00000      -     -  409s
+H    0     0                      21.0000000   21.00000  0.00%     -  430s
+     0     0   21.00000    0 1157   21.00000   21.00000  0.00%     -  431s
+
+Explored 1 nodes (73914 simplex iterations) in 431.32 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 21 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.100000000000e+01, best bound 2.100000000000e+01, gap 0.0000%
+============================================================
+[INFO]: STARTING A173-P130-R9-B6-L4-T14-C0.3.cs
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 2023519 rows, 1569119 columns and 10117460 nonzeros
+Model fingerprint: 0xe53c3bed
+Variable types: 0 continuous, 1569119 integer (1569118 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 5e+02]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+00]
+Presolve removed 45894 rows and 47976 columns (presolve time = 6s) ...
+Presolve removed 572638 rows and 47976 columns (presolve time = 10s) ...
+Presolve removed 735924 rows and 47976 columns (presolve time = 15s) ...
+Presolve removed 850479 rows and 47976 columns (presolve time = 20s) ...
+Presolve removed 907704 rows and 47976 columns (presolve time = 25s) ...
+Presolve removed 909181 rows and 494448 columns (presolve time = 31s) ...
+Presolve removed 909393 rows and 494448 columns (presolve time = 35s) ...
+Presolve removed 911096 rows and 494448 columns (presolve time = 40s) ...
+Presolve removed 914375 rows and 494448 columns (presolve time = 45s) ...
+Presolve removed 915011 rows and 496212 columns (presolve time = 50s) ...
+Presolve removed 917118 rows and 496408 columns (presolve time = 55s) ...
+Presolve removed 917118 rows and 496408 columns (presolve time = 60s) ...
+Presolve removed 917118 rows and 764660 columns (presolve time = 784s) ...
+Presolve removed 1192375 rows and 765354 columns (presolve time = 785s) ...
+Presolve removed 1192379 rows and 765358 columns (presolve time = 791s) ...
+Presolve removed 1192163 rows and 765142 columns
+Presolve time: 791.04s
+Presolved: 831356 rows, 803977 columns, 5010498 nonzeros
+Variable types: 0 continuous, 803977 integer (803977 binary)
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 15s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Elapsed ordering time = 30s
+Elapsed ordering time = 35s
+Ordering time: 38.38s
+
+Barrier performed 0 iterations in 843.47 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.07s
+
+Solved with dual simplex
+
+Root relaxation: objective 1.000000e+01, 18682 iterations, 47.29 seconds
+Total elapsed time = 913.13s
+Total elapsed time = 945.06s
+Total elapsed time = 985.43s
+Total elapsed time = 993.34s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   10.00000    0  929          -   10.00000      -     - 1052s
+     0     0   10.00000    0 2054          -   10.00000      -     - 1318s
+     0     0   10.00000    0 2187          -   10.00000      -     - 1531s
+     0     0   10.00000    0  646          -   10.00000      -     - 1811s
+     0     0   10.00000    0 1093          -   10.00000      -     - 1838s
+     0     0   10.00000    0  450          -   10.00000      -     - 1984s
+     0     0   10.00000    0 1673          -   10.00000      -     - 2052s
+     0     0   10.00000    0  581          -   10.00000      -     - 2176s
+     0     0   10.00000    0 1408          -   10.00000      -     - 2218s
+     0     0   10.00000    0  867          -   10.00000      -     - 2337s
+     0     0   10.00000    0 2307          -   10.00000      -     - 2419s
+     0     0   10.00000    0  677          -   10.00000      -     - 2600s
+     0     0   10.00000    0 1623          -   10.00000      -     - 2650s
+     0     0   10.00000    0  716          -   10.00000      -     - 2827s
+     0     0   10.00000    0  352          -   10.00000      -     - 2855s
+     0     2   10.00000    0  228          -   10.00000      -     - 3149s
+     1     4   10.00000    1  199          -   10.00000      -  2044 3159s
+     3     8   10.00000    2 1151          -   10.00000      -  1803 3231s
+     7    12   10.00000    3 2158          -   10.00000      -  4165 3323s
+    11    16   10.00000    4 1934          -   10.00000      -  4083 3379s
+    15    20   10.00000    4 1924          -   10.00000      -  4497 3414s
+    19    24   10.00000    5 1854          -   10.00000      -  3965 3443s
+    23    28   10.00000    6 1799          -   10.00000      -  3544 3493s
+    27    33   10.00000    5  471          -   10.00000      -  3714 3600s
+
+Cutting planes:
+  Gomory: 1
+  Cover: 745
+  Implied bound: 31
+  Clique: 1358
+  MIR: 216
+  StrongCG: 4
+  GUB cover: 12
+  Zero half: 388
+  RLT: 1124
+  BQP: 3
+
+Explored 32 nodes (456989 simplex iterations) in 3600.53 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 0
+
+Time limit reached
+Best objective -, best bound 1.000000000000e+01, gap -
+============================================================
+[INFO]: STARTING A173-P150-R9-B6-L4-T14-C0.3.cs
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 2325888 rows, 1804439 columns and 11632840 nonzeros
+Model fingerprint: 0x3efb2baf
+Variable types: 0 continuous, 1804439 integer (1804438 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 6e+02]
+  Objective range  [1e+00, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+00]
+Presolve removed 45894 rows and 50144 columns (presolve time = 5s) ...
+Presolve removed 625837 rows and 50144 columns (presolve time = 10s) ...
+Presolve removed 770118 rows and 50144 columns (presolve time = 15s) ...
+Presolve removed 908565 rows and 50144 columns (presolve time = 20s) ...
+Presolve removed 1039586 rows and 50144 columns (presolve time = 25s) ...
+Presolve removed 1039586 rows and 50144 columns (presolve time = 30s) ...
+Presolve removed 1041257 rows and 565304 columns (presolve time = 36s) ...
+Presolve removed 1041734 rows and 565304 columns (presolve time = 40s) ...
+Presolve removed 1044437 rows and 565304 columns (presolve time = 45s) ...
+Presolve removed 1046708 rows and 565304 columns (presolve time = 50s) ...
+Presolve removed 1046708 rows and 565304 columns (presolve time = 58s) ...
+Presolve removed 1046443 rows and 571114 columns
+Presolve time: 851.21s
+
+Explored 0 nodes (0 simplex iterations) in 852.45 seconds
+Thread count was 1 (of 8 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+============================================================
+[INFO]: STARTING A173-P130-R6-B7-L5-T14-C0.1.cs
+
+Gurobi 9.1.1 (win64) logging started Sat Jul 24 19:22:20 2021
+
+Academic license - for non-commercial use only - expires 2021-08-11
+Using license file C:\Users\Keleron\gurobi.lic
+Using gurobi.env file
+Set parameter TimeLimit to value 3600
+Set parameter LogFile to value gurobi.log
+Set parameter LogToConsole to value 0
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 1281229 rows, 1164681 columns and 7036910 nonzeros
+Model fingerprint: 0x13dcd423
+Variable types: 0 continuous, 1164681 integer (1164680 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 7e+02]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Presolve removed 150287 rows and 42576 columns (presolve time = 5s) ...
+Presolve removed 225860 rows and 42576 columns (presolve time = 10s) ...
+Presolve removed 245584 rows and 42576 columns (presolve time = 15s) ...
+Presolve removed 246403 rows and 151776 columns (presolve time = 21s) ...
+Presolve removed 246403 rows and 151776 columns (presolve time = 25s) ...
+Presolve removed 246603 rows and 151776 columns (presolve time = 30s) ...
+Presolve removed 246603 rows and 151776 columns (presolve time = 35s) ...
+Presolve removed 246603 rows and 247188 columns (presolve time = 92s) ...
+Presolve removed 246603 rows and 247188 columns (presolve time = 97s) ...
+Presolve removed 343471 rows and 247188 columns (presolve time = 100s) ...
+Presolve removed 343481 rows and 247188 columns (presolve time = 107s) ...
+Presolve removed 343481 rows and 247188 columns
+Presolve time: 106.73s
+Presolved: 937748 rows, 917493 columns, 5490979 nonzeros
+Variable types: 0 continuous, 917493 integer (917493 binary)
+Found heuristic solution: objective 34.0000000
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 15s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Ordering time: 26.31s
+
+Barrier performed 0 iterations in 170.47 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.08s
+
+Solved with dual simplex
+
+Root relaxation: objective 5.000000e+00, 15617 iterations, 32.69 seconds
+Total elapsed time = 230.17s
+Total elapsed time = 249.28s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    5.00000    0 1354   34.00000    5.00000  85.3%     -  321s
+H    0     0                       7.0000000    5.00000  28.6%     -  325s
+H    0     0                       5.0000000    5.00000  0.00%     -  326s
+     0     0    5.00000    0 1354    5.00000    5.00000  0.00%     -  326s
+
+Explored 1 nodes (45154 simplex iterations) in 326.28 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 5 7 34 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.000000000000e+00, best bound 5.000000000000e+00, gap 0.0000%
+============================================================
+[INFO]: STARTING A173-P130-R6-B7-L5-T14-C0.2.cs
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 1390429 rows, 1164681 columns and 7255184 nonzeros
+Model fingerprint: 0x379a3bdd
+Variable types: 0 continuous, 1164681 integer (1164680 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 7e+02]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Presolve removed 259490 rows and 42579 columns (presolve time = 5s) ...
+Presolve removed 355448 rows and 42579 columns (presolve time = 10s) ...
+Presolve removed 454547 rows and 42579 columns (presolve time = 15s) ...
+Presolve removed 455821 rows and 260979 columns (presolve time = 20s) ...
+Presolve removed 456127 rows and 260979 columns (presolve time = 25s) ...
+Presolve removed 458261 rows and 260979 columns (presolve time = 30s) ...
+Presolve removed 458261 rows and 260979 columns (presolve time = 36s) ...
+Presolve removed 458261 rows and 260979 columns (presolve time = 40s) ...
+Presolve removed 458261 rows and 260979 columns (presolve time = 46s) ...
+Presolve removed 458261 rows and 430288 columns (presolve time = 119s) ...
+Presolve removed 458261 rows and 430335 columns (presolve time = 129s) ...
+Presolve removed 631416 rows and 430436 columns (presolve time = 130s) ...
+Presolve removed 631416 rows and 430436 columns (presolve time = 136s) ...
+Presolve removed 631416 rows and 430436 columns
+Presolve time: 136.33s
+Presolved: 759013 rows, 734245 columns, 4475773 nonzeros
+Variable types: 0 continuous, 734245 integer (734245 binary)
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Ordering time: 10.51s
+
+Barrier performed 0 iterations in 163.24 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.05s
+
+Solved with dual simplex
+
+Root relaxation: objective 1.500000e+01, 10278 iterations, 14.61 seconds
+Total elapsed time = 203.84s
+Total elapsed time = 216.25s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   15.00000    0 1256          -   15.00000      -     -  308s
+H    0     0                      22.0000000   15.00000  31.8%     -  325s
+     0     0   15.00000    0 2417   22.00000   15.00000  31.8%     -  611s
+     0     0   15.00000    0 2273   22.00000   15.00000  31.8%     -  637s
+     0     0   15.00000    0 3518   22.00000   15.00000  31.8%     -  935s
+H    0     0                      21.0000000   15.00000  28.6%     -  950s
+     0     0   15.00000    0 3534   21.00000   15.00000  28.6%     -  999s
+     0     0   15.00000    0 4265   21.00000   15.00000  28.6%     - 1221s
+H    0     0                      18.0000000   15.00000  16.7%     - 1245s
+     0     0   15.00000    0 4117   18.00000   15.00000  16.7%     - 1294s
+     0     0   15.00000    0 4643   18.00000   15.00000  16.7%     - 1511s
+     0     0   15.00000    0  764   18.00000   15.00000  16.7%     - 1809s
+H    0     0                      17.0000000   15.00000  11.8%     - 1813s
+     0     0   15.00000    0 1282   17.00000   15.00000  11.8%     - 1949s
+     0     0   15.00000    0 1447   17.00000   15.00000  11.8%     - 2073s
+     0     0   15.00000    0  136   17.00000   15.00000  11.8%     - 2162s
+H    0     0                      15.0000000   15.00000  0.00%     - 2164s
+     0     0   15.00000    0  136   15.00000   15.00000  0.00%     - 2164s
+
+Cutting planes:
+  Gomory: 5
+  Cover: 27
+  Implied bound: 240
+  Clique: 5
+  MIR: 7
+  Zero half: 75
+  RLT: 805
+  BQP: 15
+
+Explored 1 nodes (201266 simplex iterations) in 2164.83 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 5: 15 17 18 ... 22
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.500000000000e+01, best bound 1.500000000000e+01, gap 0.0000%
+============================================================
+[INFO]: STARTING A173-P150-R5-B8-L5-T14-C0.2.cs
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 1525252 rows, 1278201 columns and 7949515 nonzeros
+Model fingerprint: 0x4c95c6bf
+Variable types: 0 continuous, 1278201 integer (1278200 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+02]
+  Objective range  [1e+00, 8e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Presolve removed 41061 rows and 44189 columns (presolve time = 5s) ...
+Presolve removed 384422 rows and 44189 columns (presolve time = 10s) ...
+Presolve removed 491766 rows and 44189 columns (presolve time = 15s) ...
+Presolve removed 498273 rows and 284189 columns (presolve time = 20s) ...
+Presolve removed 498273 rows and 284189 columns (presolve time = 25s) ...
+Presolve removed 498833 rows and 284189 columns (presolve time = 30s) ...
+Presolve removed 499233 rows and 284189 columns (presolve time = 35s) ...
+Presolve removed 499233 rows and 472465 columns (presolve time = 100s) ...
+Presolve removed 499233 rows and 478285 columns (presolve time = 125s) ...
+Presolve removed 697186 rows and 478489 columns (presolve time = 131s) ...
+Presolve removed 697186 rows and 478489 columns
+Presolve time: 131.06s
+Presolved: 828066 rows, 799712 columns, 4867216 nonzeros
+Variable types: 0 continuous, 799712 integer (799712 binary)
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Ordering time: 9.10s
+
+Barrier performed 0 iterations in 167.52 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.05s
+
+Solved with dual simplex
+
+Root relaxation: objective 5.200000e+01, 9946 iterations, 14.07 seconds
+Total elapsed time = 199.28s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   52.00000    0 1225          -   52.00000      -     -  305s
+     0     0   52.00000    0 2177          -   52.00000      -     -  461s
+     0     0   52.00000    0 2024          -   52.00000      -     -  498s
+     0     0   52.00000    0  220          -   52.00000      -     -  629s
+H    0     0                      52.0000000   52.00000  0.00%     -  632s
+     0     0   52.00000    0  218   52.00000   52.00000  0.00%     -  632s
+
+Cutting planes:
+  Gomory: 3
+  Cover: 252
+  Implied bound: 1
+  Clique: 2719
+  MIR: 82
+  StrongCG: 12
+  GUB cover: 5
+  Zero half: 71
+  RLT: 1168
+
+Explored 1 nodes (66688 simplex iterations) in 632.98 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 52 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.200000000000e+01, best bound 5.200000000000e+01, gap 0.0000%
+============================================================
+[INFO]: STARTING A173-P150-R7-B6-L5-T14-C0.1.cs
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 1469966 rows, 1338281 columns and 8082515 nonzeros
+Model fingerprint: 0xfb2f383e
+Variable types: 0 continuous, 1338281 integer (1338280 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+02]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Presolve removed 167087 rows and 44186 columns (presolve time = 5s) ...
+Presolve removed 271039 rows and 44186 columns (presolve time = 10s) ...
+Presolve removed 279318 rows and 170186 columns (presolve time = 16s) ...
+Presolve removed 279318 rows and 170186 columns (presolve time = 20s) ...
+Presolve removed 279318 rows and 170186 columns (presolve time = 26s) ...
+Presolve removed 279318 rows and 170186 columns (presolve time = 30s) ...
+Presolve removed 279318 rows and 270448 columns (presolve time = 90s) ...
+Presolve removed 279318 rows and 270454 columns (presolve time = 95s) ...
+Presolve removed 381102 rows and 270478 columns (presolve time = 104s) ...
+Presolve removed 381102 rows and 270478 columns
+Presolve time: 103.75s
+Presolved: 1088864 rows, 1067803 columns, 6390534 nonzeros
+Variable types: 0 continuous, 1067803 integer (1067803 binary)
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 15s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Elapsed ordering time = 30s
+Elapsed ordering time = 35s
+Elapsed ordering time = 40s
+Elapsed ordering time = 45s
+Ordering time: 45.69s
+
+Barrier performed 0 iterations in 177.77 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 1.37s
+
+Solved with dual simplex
+
+Root relaxation: objective 1.500000e+01, 20344 iterations, 51.96 seconds
+Total elapsed time = 217.35s
+Total elapsed time = 230.95s
+Total elapsed time = 236.49s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   15.00000    0 1348          -   15.00000      -     -  297s
+     0     0   15.00000    0 2585          -   15.00000      -     -  537s
+H    0     0                      16.0000000   15.00000  6.25%     -  633s
+     0     0   15.00000    0 2493   16.00000   15.00000  6.25%     -  657s
+     0     0   15.00000    0  286   16.00000   15.00000  6.25%     -  954s
+     0     0   15.00000    0  303   16.00000   15.00000  6.25%     - 1109s
+H    0     0                      15.0000000   15.00000  0.00%     - 1110s
+     0     0   15.00000    0  303   15.00000   15.00000  0.00%     - 1110s
+
+Explored 1 nodes (142930 simplex iterations) in 1110.75 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 2: 15 16 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.500000000000e+01, best bound 1.500000000000e+01, gap 0.0000%
+============================================================
+[INFO]: STARTING A173-P170-R6-B9-L4-T14-C0.2.cs
+Gurobi Optimizer version 9.1.1 build v9.1.1rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 2435720 rows, 2039759 columns and 12758976 nonzeros
+Model fingerprint: 0x7e08a454
+Variable types: 0 continuous, 2039759 integer (2039758 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 7e+02]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+00]
+Presolve removed 45894 rows and 52168 columns (presolve time = 6s) ...
+Presolve removed 475370 rows and 52168 columns (presolve time = 10s) ...
+Presolve removed 577946 rows and 52168 columns (presolve time = 15s) ...
+Presolve removed 676137 rows and 52168 columns (presolve time = 20s) ...
+Presolve removed 771878 rows and 52168 columns (presolve time = 25s) ...
+Presolve removed 782963 rows and 52168 columns (presolve time = 30s) ...
+Presolve removed 784678 rows and 441400 columns (presolve time = 37s) ...
+Presolve removed 784678 rows and 441400 columns (presolve time = 40s) ...
+Presolve removed 786374 rows and 441400 columns (presolve time = 45s) ...
+Presolve removed 790870 rows and 441400 columns (presolve time = 50s) ...
+Presolve removed 794167 rows and 441400 columns (presolve time = 55s) ...
+Presolve removed 794271 rows and 441400 columns (presolve time = 60s) ...
+Presolve removed 794271 rows and 441400 columns (presolve time = 68s) ...
+Presolve removed 794271 rows and 678456 columns (presolve time = 186s) ...
+Presolve removed 1035183 rows and 678470 columns (presolve time = 191s) ...
+Presolve removed 1035183 rows and 678470 columns (presolve time = 197s) ...
+Presolve removed 1035130 rows and 678417 columns
+Presolve time: 196.85s
+Presolved: 1400590 rows, 1361342 columns, 8356722 nonzeros
+Variable types: 0 continuous, 1361342 integer (1361342 binary)
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 15s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Elapsed ordering time = 30s
+Elapsed ordering time = 35s
+Elapsed ordering time = 40s
+Elapsed ordering time = 45s
+Elapsed ordering time = 50s
+Elapsed ordering time = 55s
+Elapsed ordering time = 60s
+Ordering time: 63.63s
+
+Barrier performed 0 iterations in 310.75 seconds
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.10s
+
+Solved with dual simplex
+
+Root relaxation: objective 1.750000e+02, 19673 iterations, 73.86 seconds
+Total elapsed time = 414.64s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  175.00000    0 1819          -  175.00000      -     -  632s
+H    0     0                     203.0000000  175.00000  13.8%     -  678s
+H    0     0                     194.0000000  175.00000  9.79%     -  690s
+     0     0  175.00000    0 2581  194.00000  175.00000  9.79%     - 1132s
+H    0     0                     179.0000000  175.00000  2.23%     - 1518s
+     0     0  175.00000    0 2625  179.00000  175.00000  2.23%     - 1601s
+     0     0  175.00000    0 1173  179.00000  175.00000  2.23%     - 2164s
+H    0     0                     177.0000000  175.00000  1.13%     - 2182s
+     0     0  175.00000    0 1581  177.00000  175.00000  1.13%     - 2291s
+     0     0  175.00000    0  787  177.00000  175.00000  1.13%     - 2767s
+     0     0  175.00000    0 1053  177.00000  175.00000  1.13%     - 2821s
+     0     0  175.00000    0  312  177.00000  175.00000  1.13%     - 3327s
+H    0     0                     176.0000000  175.00000  0.57%     - 3331s
+     0     0  175.00000    0   30  176.00000  175.00000  0.57%     - 3343s
+     0     0  175.00000    0    2  176.00000  175.00000  0.57%     - 3360s
+     0     0  postponed    0       176.00000  175.00000  0.57%     - 3600s
+
+Explored 1 nodes (318253 simplex iterations) in 3601.03 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 5: 176 177 179 ... 203
+
+Time limit reached
+Best objective 1.760000000000e+02, best bound 1.750000000000e+02, gap 0.5682%
