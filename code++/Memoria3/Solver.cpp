@@ -134,36 +134,27 @@ void Solver::solve()
 	};
 	for (size_t i = 0; i < sessions.size(); i++) grid[i / nB][i % nB] = sessions[i];
 
-	int total_cost = 0;
-	for (int i = 0; i < nB; i++) total_cost += colCost(i);
+	int total_cost = fullCost();
 	if (PARAMS["-v"] > 0) cout << "\nINFO: INITIAL COST " << total_cost << "\n";
 
 	int N = (int)PARAMS["-steps"];
-
 	float TEMP = total_cost * 2;
 	float cooldown = PARAMS["-cr"];
 	float p1 = PARAMS["-p1"], p2 = PARAMS["-p2"], p3 = PARAMS["-p3"], p4 = PARAMS["-p4"];
 	bool weird_mode = (bool)PARAMS["-weird"];
+
 	int bad_sol_counter = 0;
 	int global_best = INT_MAX;
 
 	for (int i = 0; i < N; i++) {
-
 		if (bad_sol_counter > PARAMS["-stuck"]) {
-			int local_full_cost = 0;
-			for (int i = 0; i < nB; i++) local_full_cost += colCost(i);
-			if (local_full_cost < global_best) global_best = local_full_cost;
+			int local_full_cost = fullCost();
+			global_best = local_full_cost < global_best ? local_full_cost : global_best;
 			float new_temp = TEMP + (PARAMS["-reheat"] - (PARAMS["-reheat"] - 1) * (float)i / (float)N);
-			if (PARAMS["-v"] > 2) cout << i << " LOCAL OPTIMA IN " << local_full_cost << " NEED RE HEAT " << TEMP << "->" << new_temp << "\n";
+			if (PARAMS["-v"] == 2) cout << i << " LOCAL OPTIMA IN " << local_full_cost << " NEED RE HEAT " << TEMP << "->" << new_temp << "\n";
 			TEMP = new_temp;
 			bad_sol_counter = 0;
 		}
-		//int total_cost = 0;
-		//for (size_t b = 0; b < nB; b++)
-		//{
-		//	total_cost += colCost(b);
-		//}
-		//cout << total_cost << ";";
 
 		float chance = uniform();
 		if (chance < p1) {
@@ -171,6 +162,7 @@ void Solver::solve()
 			int delta = -(colCost(c1) + colCost(c2));
 			swap(grid[r1][c1], grid[r2][c2]);
 			delta += (colCost(c1) + colCost(c2));
+			if (delta > 0 && PARAMS["-v"] == 1) cout << fullCost() << "\n";
 			if (delta >= 0) {
 				if (weird_mode) {
 					if (exp((float)delta / TEMP) > uniform()) swap(grid[r1][c1], grid[r2][c2]);
@@ -192,6 +184,7 @@ void Solver::solve()
 			Person* newPerson = grid[r][c]->track->chairs[randint(grid[r][c]->track->chairs.size())];
 			grid[r][c]->chair = newPerson;
 			delta += colCost(c);
+			if (delta > 0 && PARAMS["-v"] == 1) cout << fullCost() << "\n";
 			if (delta >= 0) {
 				if (weird_mode) {
 					if (exp((float)delta / TEMP) > uniform()) grid[r][c]->chair = oldPerson;
@@ -213,6 +206,7 @@ void Solver::solve()
 			Person* newPerson = grid[r][c]->track->organizers[randint(grid[r][c]->track->organizers.size())];
 			grid[r][c]->organizer = newPerson;
 			delta += colCost(c);
+			if (delta > 0 && PARAMS["-v"] == 1) cout << fullCost() << "\n";
 			if (delta >= 0) {
 				if (weird_mode) {
 					if (exp((float)delta / TEMP) > uniform()) grid[r][c]->organizer = oldPerson;
@@ -260,6 +254,7 @@ void Solver::solve()
 			int delta = -(colCost(c1) + colCost(c2));
 			swap(grid[r1][c1]->articles[a1], grid[r2][c2]->articles[a2]);
 			delta += (colCost(c1) + colCost(c2));
+			if (delta > 0 && PARAMS["-v"] == 1) cout << fullCost() << "\n";
 			if (delta >= 0) {
 				if (weird_mode) {
 					if (exp((float)delta / (float)TEMP) > uniform()) swap(grid[r1][c1]->articles[a1], grid[r2][c2]->articles[a2]);
@@ -346,6 +341,13 @@ int Solver::colCost(int col)
 		}
 	}
 	return cost;
+}
+
+int Solver::fullCost()
+{
+	int suma = 0;
+	for (size_t b = 0; b < nB; b++) suma += colCost(b);
+	return suma;
 }
 
 void Solver::writeSolution(string filename)
